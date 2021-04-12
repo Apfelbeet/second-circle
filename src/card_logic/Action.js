@@ -1,5 +1,5 @@
-import * as CardInterpreter from "../CardInterpreter";
-import { GAME_STATUS } from "../../states/GlobalState";
+import * as CardInterpreter from "./CardInterpreter";
+import { GAME_STATUS } from "../states/GlobalState";
 
 export function actionFromRaw(raw, source, variables) {
     if (raw === undefined || raw.type === undefined) {

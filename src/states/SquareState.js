@@ -14,7 +14,7 @@ export const FINISH_SQUARE = {
 };
 
 export function getStartSquare(index = 0) {
-    return new SquareState(index, START_SQUARE, (globalState) => globalState);
+    return new SquareState(index, START_SQUARE, (globalState) => globalState.withNextCurrentPlayer().withGameStatus(GAME_STATUS.TURN));
 }
 
 export function getFinishSquare(index) {

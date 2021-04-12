@@ -1,8 +1,214 @@
-import { actionFromRaw } from "./actions/Action";
+import { actionFromRaw } from "./Action";
 
+/**
+ * CardInterpreter provides bunch of function to decode/resolve cards to enable embedding them into the game.
+ * A card is usually stored in a deck. To understand the structure of the deck, you want to look into the Deck file.
+ * The CardInterpreter is only responsible for the individual card.
+ *
+ * A unresolved card (raw input) is a json-object with the following strutcture:
+ * {
+ *      //The text that will be displayed on the card.
+ *      //It can contain variables. For further informations look at the resolveText() function.
+ *      "text": {string}
+ *
+ *      //The frequency is used from the deck to control the distribution of the cards.
+ *      //A higher number will increase the chances to appear.
+ *      "frequency": {0-1}
+ *
+ *      //Appearance controls where the card is allowed to appear.
+ *      //lower and upper are the lower and upper bound in percent.
+ *      //(0-1 => the card can appear everywhere. 0.5-1 => the card appears only in the upper half)
+ *      "appearance": {{"lower": 0-1, "upper": 0-1}}
+ *
+ *      //options are a more complex structure, the next passage explains their structure and purpose.
+ *      //options is a list of options the player will see next to the card.
+ *      //Non empty list will be extended with an extra "skip" option.
+ *      //Empty or undefined lists will be replaced with a list with only a "next" option.
+ *      "options": [option]
+ *
+ *      //actions are a more complex structure, an extra passage explains their structure and purpose.
+ *      //actions is a list of events that will happen if any option is excuted. (=> they will always be executed)
+ *      "actions": [action]
+ *
+ *      //variables are a more complex structure, an extra passage explains their structure and purpose.
+ *      //variables are a way to generate data and use them at other points in the card.
+ *      //Example: You want to display a number based on the Gamestate. In the text you can then reference the variable
+ *      "variables": [variables]
+ * }
+ *
+ *
+ * ---
+ * Option
+ * ---
+ *
+ * An option will be displayed next to the card. The user can choose one option.
+ * Structure of an Option
+ * {
+ *      //The text will be display on the button of this option. Like the text of a card, it can contain variables.
+ *      "text": {string}
+ *
+ *      //Like the card itself each option has a own list of actions, that will be executed on top of the general actions of this card.
+ *      "actions": [action]
+ * }
+ *
+ * A option can pass two phases:
+ * 1. Resolve: Resolves the text and the actions. (Every option will enter this phase)
+ * 2. Run: Runs all actions that belong to this option. (Only selected options will enter this phase)
+ *
+ * ---
+ * Action
+ * ---
+ *
+ * An action is an event that will change the state of the game.
+ * Any card can have actions (general and/or special ones for each option) that will be executed after the user choose an option.
+ * There are multiple types of actions, but every unresolved/raw action ist based on this structure:
+ * {
+ *      //Name of the type (see list below)
+ *      "type": {string}
+ * }
+ *
+ * A action cann pass two phases:
+ * 1. Resolve: Gathers als informations of the current gamestate it needs to run the action. (e.g. resolving selectors)
+ * 2. Run: Perfroms the action and changes the current gamestate.
+ *
+ * List of all types of actions and their sturcutre:
+ *
+ * "move": Moves all selected players by an specified offset relative to their current position.
+ * (postions out of bound will be replaced by the min/max value)
+ * {
+ *      "type": "move",
+ *      "selectors" [selectors],
+ *      "offset": {number}
+ * }
+ *
+ * "moveBack": Like "move", but the offset is inverted. ("move" with offset:=-2 = "moveBack" with offset:=2)
+ *
+ * "nextPlayer": This action will change the current player to the next player on turn.
+ * {
+ *      "type": "nextPlayer"
+ * }
+ *
+ * ---
+ * Selectors
+ * ---
+ *
+ * Like actions there are multiple types of selectors. An selector is term for set of players you want to determine.
+ * e.g. some actions take a list of selectors to know on which players they have to perform the action.
+ * The elements of a selector are distinct, but may have a specific order.
+ * The basic sturtucture is:
+ * {
+ *      //name of the type
+ *      "type": {string}
+ *
+ *      //Every selector allows a set of blacklistet players, that will be excluded by this selector.
+ *      //This set is itself a selector. This way you can construct complex sets with only basic selctors.
+ *      "excluded": [selector]
+ * }
+ *
+ * List of all types of selectors:
+ * "all": All players (no extra syntax)
+ *
+ * "self": The source of that card. (no extra syntax)
+ *
+ * "firstElementFromSelctors": Extracts the first player from selectors.
+ * {
+ *      ...
+ *      //The selecors you want the first element of.
+ *      "selectors": [selctor]
+ * }
+ *
+ * "randomOrderOfSelectors": Shuffle the order of the elements from selctors.
+ * {
+ *      ...
+ *      //The selecors you want to shuffle.
+ *      "selectors": [selctor]
+ * }
+ *
+ * "randomPlayer": Gives a single random player.
+ * {
+ *      ...
+ *      //(default value = true) If true the source is included.
+ *      ["self": {boolean}] = true
+ * }
+ *
+ * "indexOffset": select players relative to their order in the player list.
+ * {
+ *      ...
+ *      //the offset of the position in the player list.
+ *      offset: {number},
+ *
+ *      //set of players as "starting point" for the offset
+ *      selectors: [selectors]
+ * }
+ *
+ * "sameSquare": all players on the same square.
+ * {
+ *      ...
+ *      //Select all players, that are on the same square as the players in this selctor.
+ *      selectors: [selector]
+ * }
+ *
+ * ---
+ * Variables
+ * ---
+ *
+ * Variables are a way to gather some informations of the gamestate and deploy those at different points of the card.
+ * Like selectors or actions they have multiple types too.
+ * Basic structure:
+ * {
+ *      //To identify the variable.
+ *      "name": {string}
+ *
+ *      //Type of the variable.
+ *      "type": {string}
+ * }
+ *
+ * List of all types of variables:
+ * "randomInteger": Random integer in a range
+ *
+ * {
+ *      ...
+ *      //The range of the random number.
+ *      "range": {"bottom": number, "top": number}
+ * }
+ *
+ * "selectors": Allows to have a list of selectors as variable
+ * {
+ *      ...
+ *      //The range of the random number.
+ *      "selectors": [selctor]
+ * }
+ *
+ * Resolve: A resolved variable has this structure:
+ * {
+ *      //same name like unresolved
+ *      "name": {string}
+ *
+ *      //the actual value of the variable
+ *      "value": {*}
+ *
+ *      //representing the value as string
+ *      "string": {string}
+ * }
+ *
+ * If you want to use a variable you can use the following structure instead of the actual strucutre you would use:
+ * {
+ *      "type": "variable"
+ *
+ *      //the name of the variable.
+ *      "name": {string}
+ * }
+ *
+ * If you want to use a variable in a text, you can write "<variableName>" at any position in a text.
+ *
+ */
+
+/**
+ * Action that skips to the next player.
+ */
 const ACTION_NEXT = {
-    "type": "nextPlayer",
-}
+    type: "nextPlayer",
+};
 
 /**
  * translates the raw object of a card to a clean version, that meet some assumptions.
@@ -18,7 +224,7 @@ const ACTION_NEXT = {
  * {
  *  "text": string,
  *  "frequency": number,
- *  "appearamce": {"lower":0, "upper": 1},
+ *  "appearance": {"lower":0, "upper": 1},
  *  "options": [option],
  *  "actions": [action],
  *  "variables": [variable],
@@ -77,9 +283,9 @@ export function resolveCard(cardRaw, globalState, source) {
     let opt;
 
     if (cardRaw.options === undefined || cardRaw.options === 0) {
-        opt = [newOption("next", [ACTION_NEXT])];
+        opt = [newOption("next", [])];
     } else {
-        opt = [...cardRaw.options, newOption("skip", [ACTION_NEXT])];
+        opt = [...cardRaw.options, newOption("skip", [])];
     }
 
     //resolve variables
@@ -102,7 +308,7 @@ export function resolveCard(cardRaw, globalState, source) {
 
     return {
         text: resolveText(cardRaw.text, variables),
-        options: resolveOptions(globalState, opt, source, variables),
+        options: resolveOptions(globalState, opt, actions, source, variables),
         actions: resolveActions(globalState, actions, source, variables),
         frequency: fre,
         appearance: app,
@@ -125,6 +331,13 @@ function newOption(text, actions = []) {
     };
 }
 
+/**
+ * Returns correspoding variable to name.
+ *
+ * @param {string} name: Name of the variable
+ * @param {[*]} variables: List of all defined variables.
+ * @returns {{value: {*}, name: {string}, string: {string}}}
+ */
 function getVariable(name, variables) {
     const variable = variables.find((v) => v.name === name);
     if (variable === undefined) {
@@ -133,6 +346,14 @@ function getVariable(name, variables) {
     return variable;
 }
 
+/**
+ * Replaces all variables in the text. A variable is encoded as a text seqment of the form: "<variableName>"
+ * Example: "<a>b c" with a := "z" will resolve to "zb c"
+ *
+ * @param {string} text: unresolved input
+ * @param {[*]} variables: List of all variables
+ * @returns {string}
+ */
 function resolveText(text, variables) {
     const findPlaceholder = /<(\w)+>/g;
 
@@ -154,21 +375,27 @@ function resolveText(text, variables) {
  * Resolve a list of options.
  *
  * @param {*} globalState
- * @param {*} options
- * @param {*} source
- * @returns
+ * @param {*} options list of unresolved options.
+ * @param {*} source player who started the resolve process of this card.
+ * @returns list of resolved options.
  */
-function resolveOptions(globalState, options, source, variables) {
+function resolveOptions(globalState, options, cardActions, source, variables) {
     return options === undefined
         ? []
         : options
-              .map((o) => resolveOption(globalState, o, source, variables))
+              .map((o) =>
+                  resolveOption(globalState, o, cardActions, source, variables)
+              )
               .filter((o) => o !== undefined);
 }
 
 /**
  * Resolve option:
  *  - resolve all actions
+ *  - resolve variables in text to display
+ *
+ * When the list of actions is undefined, a default action will be added, that will skip to the next player.
+ * If you do not want to perform any action at all, then you must pass an empty list.
  *
  * option:
  * {
@@ -177,15 +404,19 @@ function resolveOptions(globalState, options, source, variables) {
  * }
  *
  * @param {*} globalState
- * @param {*} option
- * @param {*} source
- * @returns
+ * @param {{text: string, actions: [unresolvedAction]}} option unresolved option
+ * @param {*} source player who started the resolve process of this card.
+ * @returns {{text: string, actions: [resolvedAction]}}
  */
-function resolveOption(globalState, option, source, variables) {
+function resolveOption(globalState, option, cardActions, source, variables) {
     if (option.text === undefined) return undefined;
 
     let act = option.actions;
-    if (act === undefined || act.length === 0) {
+    if (act === undefined) {
+        act = [];
+    }
+
+    if (act.length === 0 && cardActions.length === 0) {
         act = [ACTION_NEXT];
     }
 
@@ -195,7 +426,7 @@ function resolveOption(globalState, option, source, variables) {
     };
 }
 
-export function runOption(globalState, setGlobalState ,cardActions, option) {
+export function runOption(globalState, setGlobalState, cardActions, option) {
     let x = runActions(globalState, setGlobalState, cardActions);
     x = runActions(x, setGlobalState, option.actions);
     return x;
@@ -231,7 +462,7 @@ export function resolveSelectors(globalState, selectors, source, variables) {
     if (selectors === undefined) {
         return [];
     } else if (selectors.type === "variable") {
-        const variable = getVariable(selectors.name, variables)
+        const variable = getVariable(selectors.name, variables);
         return variable === undefined ? [] : variable.value;
     }
 
@@ -261,8 +492,8 @@ export function resolveSelectors(globalState, selectors, source, variables) {
 export function resolveSelector(globalState, selector, source, varibales = []) {
     const invalidArguments = () => {
         console.error("invalid arguments in selector.");
-    }
-    
+    };
+
     if (selector === undefined || selector.type === undefined) {
         console.error("invalid selector: " + selector);
         return undefined;
@@ -388,48 +619,74 @@ export function resolveSelector(globalState, selector, source, varibales = []) {
                 varibales
             );
             break;
-        
+
         /**
          * "type": "indexOffset",
          * "excluded": [selector],
          * "offset": number,
-         * "selectors": [selector], 
+         * "selectors": [selector],
          */
         case "indexOffset":
-            if ((typeof selector.offset) !== "number" || (typeof selector.selectors) !== "object") {
+            if (
+                typeof selector.offset !== "number" ||
+                typeof selector.selectors !== "object"
+            ) {
                 invalidArguments();
                 unfiltered = [];
             } else {
-                const offset = resolveVariableInput(selector.offset, varibales, 0);
-                const sels = resolveSelectors(globalState, selector.selectors, source, varibales);
-                
-                unfiltered = sels.map(s => {
-                    const playerIndex = globalState.getIndexFromId(s);
-                    if (playerIndex === undefined) {
-                        return undefined;
-                    } else {
-                        return globalState.players[(playerIndex + offset) % globalState.players.length].id;
-                    }
-                }).filter(s => s !== undefined);
+                const offset = resolveVariableInput(
+                    selector.offset,
+                    varibales,
+                    0
+                );
+                const sels = resolveSelectors(
+                    globalState,
+                    selector.selectors,
+                    source,
+                    varibales
+                );
+
+                unfiltered = sels
+                    .map((s) => {
+                        const playerIndex = globalState.getIndexFromId(s);
+                        if (playerIndex === undefined) {
+                            return undefined;
+                        } else {
+                            return globalState.players[
+                                (playerIndex + offset) %
+                                    globalState.players.length
+                            ].id;
+                        }
+                    })
+                    .filter((s) => s !== undefined);
             }
             break;
-        
+
         /**
          * "type": "sameSqaure",
          * "excluded": [selector],
-         * "selectors": [selector], 
+         * "selectors": [selector],
          */
         case "sameSquare":
-            
-            const sameSquareSelectors = resolveSelectors(globalState, selector.selectors, source, varibales);
+            const sameSquareSelectors = resolveSelectors(
+                globalState,
+                selector.selectors,
+                source,
+                varibales
+            );
 
             unfiltered = globalState.players
-                .filter((player) => sameSquareSelectors.find((s) => globalState.getPlayerById(s).position === player.position) !== undefined)
-                .map(p => p.id);
+                .filter(
+                    (player) =>
+                        sameSquareSelectors.find(
+                            (s) =>
+                                globalState.getPlayerById(s).position ===
+                                player.position
+                        ) !== undefined
+                )
+                .map((p) => p.id);
 
             break;
-
-
 
         default:
             console.warn("selector with unknown type");
@@ -523,7 +780,15 @@ function resolveVariable(globalState, variable, source) {
                     asString =
                         val === undefined
                             ? "undefined"
-                            : val.reduce((a, b) => a + ", " + globalState.getPlayerById(b).name, "").substring(2);
+                            : val
+                                  .reduce(
+                                      (a, b) =>
+                                          a +
+                                          ", " +
+                                          globalState.getPlayerById(b).name,
+                                      ""
+                                  )
+                                  .substring(2);
                 } else {
                     asString = "(empty)";
                 }
@@ -547,7 +812,7 @@ export function resolveVariableInput(input, variables, defaultValue) {
 
         let variableValue;
         if (variable === undefined) {
-            variableValue = defaultValue
+            variableValue = defaultValue;
         } else {
             variableValue = variable.value;
         }

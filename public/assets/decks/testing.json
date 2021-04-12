@@ -1,0 +1,74 @@
+[
+    {
+        "name": "Test",
+        "frequency": 1,
+        "cards": [
+            {
+                "text": "Gehe <n> Felder zurück.",
+                "actions": [
+                    {
+                        "type": "moveBack",
+                        "offset": {
+                            "type": "variable",
+                            "name": "n"
+                        },
+                        "selectors": [
+                            {
+                                "type": "self"
+                            }
+                        ]
+                    }
+                ],
+                "frequency": 1,
+                "appearance": { "lower": 0, "upper": 1 },
+                "variables": [
+                    {
+                        "name": "n",
+                        "type": "randomInteger",
+                        "range": {
+                            "bottom": 1,
+                            "top": 6
+                        }
+                    }
+                ]
+            },
+            {
+                "text": "Trinke <n> Schlücke oder gehe <n> Felder zurück.",
+                "options": [
+                    {
+                        "text": "Trinke <n>."
+                    },
+                    {
+                        "text": "Gehe <n> zurück.",
+                        "actions": [
+                            {
+                                "type": "moveBack",
+                                "offset": {
+                                    "type": "variable",
+                                    "name": "n"
+                                },
+                                "selectors": [
+                                    {
+                                        "type": "self"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "frequency": 1,
+                "appearance": { "lower": 0, "upper": 1 },
+                "variables": [
+                    {
+                        "name": "n",
+                        "type": "randomInteger",
+                        "range": {
+                            "bottom": 3,
+                            "top": 5
+                        }
+                    }
+                ]
+            }
+        ] 
+    }
+]

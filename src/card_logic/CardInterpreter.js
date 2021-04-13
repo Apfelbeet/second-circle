@@ -1,5 +1,3 @@
-import { actionFromRaw } from "./Action";
-
 /**
  * CardInterpreter provides bunch of function to decode/resolve cards to enable embedding them into the game.
  * A card is usually stored in a deck. To understand the structure of the deck, you want to look into the Deck file.
@@ -202,6 +200,8 @@ import { actionFromRaw } from "./Action";
  * If you want to use a variable in a text, you can write "<variableName>" at any position in a text.
  *
  */
+
+import { actionFromRaw } from "./Action";
 
 /**
  * Action that skips to the next player.
@@ -426,6 +426,15 @@ function resolveOption(globalState, option, cardActions, source, variables) {
     };
 }
 
+/**
+ * Run option by running each action of the card and each action of that option.
+ * 
+ * @param {*} globalState 
+ * @param {*} setGlobalState 
+ * @param {*} cardActions 
+ * @param {*} option 
+ * @returns new gamestate
+ */
 export function runOption(globalState, setGlobalState, cardActions, option) {
     let x = runActions(globalState, setGlobalState, cardActions);
     x = runActions(x, setGlobalState, option.actions);
@@ -433,11 +442,12 @@ export function runOption(globalState, setGlobalState, cardActions, option) {
 }
 
 /**
- *
+ * Resolve a list of actions
+ * 
  * @param {*} globalState
- * @param {*} actions
- * @param {*} source
- * @returns
+ * @param {*} actions unresolved actions.
+ * @param {*} source player who started the resolve process of this card.
+ * @returns resolved actions
  */
 function resolveActions(globalState, actions, source, variables) {
     return actions === undefined
@@ -451,13 +461,29 @@ function resolveActions(globalState, actions, source, variables) {
               });
 }
 
+/**
+ * Run a list of actions.
+ * 
+ * @param {*} globalState 
+ * @param {*} setGlobalState 
+ * @param {*} actions 
+ * @returns new gamestate
+ */
 export function runActions(globalState, setGlobalState, actions) {
     return actions.reduce(
         (state, nextCard) => nextCard.run(state, setGlobalState),
         globalState
     );
 }
-
+/**
+ * Resolve a list of selectors or replace it with an variable.
+ * 
+ * @param {*} globalState 
+ * @param {*} selectors 
+ * @param {*} source 
+ * @param {*} variables 
+ * @returns list of player ids (distinct)
+ */
 export function resolveSelectors(globalState, selectors, source, variables) {
     if (selectors === undefined) {
         return [];
@@ -478,6 +504,9 @@ export function resolveSelectors(globalState, selectors, source, variables) {
 }
 
 /**
+ * Resolve a selector to a set of player ids.
+ * More information about the structure of selectors is above.
+ * 
  * selector
  * {
  *  "type": {"all"|"self"}
@@ -487,7 +516,7 @@ export function resolveSelectors(globalState, selectors, source, variables) {
  * @param {*} globalState
  * @param {*} selector
  * @param {*} source
- * @returns
+ * @returns list of player ids
  */
 export function resolveSelector(globalState, selector, source, varibales = []) {
     const invalidArguments = () => {
@@ -703,6 +732,9 @@ function resolveVariables(globalState, variables, source) {
 }
 
 /**
+ * Resolve a variable to an actual value
+ * More information about the structure of variables is above.
+ * 
  * variable:
  * {
  *  "name": string
@@ -712,6 +744,11 @@ function resolveVariables(globalState, variables, source) {
  * @param {*} globalState
  * @param {*} variable
  * @param {*} source
+ * @returns {
+ *      "name": {string},
+ *      "value": {*},
+ *      "string": {string}
+ * }
  */
 function resolveVariable(globalState, variable, source) {
     const invalidArgument = () => {
@@ -806,6 +843,17 @@ function resolveVariable(globalState, variable, source) {
     }
 }
 
+/**
+ * takes any json structure and replace variables with its value.
+ * If the name of the variable is unkown, the default value will be used instead of the value.
+ * 
+ * In case the input structure isn't a variable, the unchanged input structure will be returned.
+ * 
+ * @param {*} input 
+ * @param {*} variables 
+ * @param {*} defaultValue 
+ * @returns 
+ */
 export function resolveVariableInput(input, variables, defaultValue) {
     if (typeof input === "object" && input.type === "variable") {
         const variable = getVariable(input.name, variables);

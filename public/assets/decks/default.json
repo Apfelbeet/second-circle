@@ -403,7 +403,7 @@
             },
             {
                 "text": "Erzähle eine peinliche Geschichte, die erste Person, die lacht muss trinken.",
-                "frequency": 0.5,
+                "frequency": 1,
                 "appearance": { "lower": 0, "upper": 1 }
             },
             {
@@ -696,17 +696,12 @@
                 ]
             },
             {
-                "text": "Jeder sagt reihum ein Lied von 3Plusss, wer keins mehr weiß trinkt.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
                 "text": "Du musst ein Lied von den Spice-Girls zum besten geben.",
                 "frequency": 1,
                 "appearance": { "lower": 0, "upper": 1 }
             },
             {
-                "text": "Jeder sagt amerikanische Präsidenten, wer keinen mehr weiss, muss trinken.",
+                "text": "Jeder sagt amerikanische Präsidenten, wer keinen mehr weiß, muss trinken.",
                 "frequency": 1,
                 "appearance": { "lower": 0, "upper": 1 }
             },
@@ -1381,12 +1376,12 @@
     },
     {
         "name": "Stop",
-        "frequency": 0.4,
-        "icon": "FaStopwatch",
+        "frequency": 0.5,
+        "icon": "FaBomb",
         "cards": [
             {
                 "text": "Gehe zurück zum Start.",
-                "frequency": 1,
+                "frequency": 0.6,
                 "appearance": { "lower": 0, "upper": 1 },
                 "actions": [
                     {
@@ -1424,7 +1419,7 @@
                         "type": "randomInteger",
                         "range": {
                             "bottom": 1,
-                            "top": 10
+                            "top": 20
                         }
                     }
                 ]

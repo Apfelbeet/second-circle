@@ -1,5 +1,8 @@
 let ID = 0;
 
+/**
+ * List of all colors players can have.
+ */
 const PLAYER_COLORS = [
     "#F2545B", //red
     "#2274A5", //blue
@@ -24,9 +27,15 @@ export class PlayerState {
     }
 
     copy() {
-        return new PlayerState(this.name, this.id ,this.position);
+        return new PlayerState(this.name, this.id, this.position);
     }
 
+    /**
+     * change position of player
+     * 
+     * @param {number} position 
+     * @returns {PlayerState}
+     */
     withPosition(position) {
         let x = this.copy();
         x.position = position;

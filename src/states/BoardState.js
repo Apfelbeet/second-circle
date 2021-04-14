@@ -1,4 +1,4 @@
-import { SquareState, getFinishSquare, getStartSquare, randomType } from './SquareState';
+import { SquareState, getFinishSquare, getStartSquare } from './SquareState';
 
 export class BoardState {
 
@@ -11,7 +11,7 @@ export class BoardState {
 
         this.squares[0] = getStartSquare();
         for (let i = 1; i < squareAmount - 1; i++) {
-            this.squares[i] = new SquareState(i, randomType(this.deck)); 
+            this.squares[i] = new SquareState(i, this.deck.randomType()); 
         }
         this.squares[squareAmount - 1] = getFinishSquare(squareAmount - 1); 
     }

@@ -1,14 +1,14 @@
 /**
  * List of all decks there are installed.
  * This list will be overwritten by the loadDecklist() function as soon as the server response to teh request.
- * 
+ *
  * You can get the list by using getDeckList().
- * 
+ *
  * The json structure is:
  * [
  *  {
  *      "name": {string}
- *      
+ *
  *      //the path is used to load the cards of the selected deck.
  *      "path": {string}
  *  },
@@ -21,14 +21,12 @@ export function getDeckList() {
     return DECKLIST;
 }
 
-
-
 /**
  * Stores a function that will be called if the deck is loaded.
  * Other portion of the application can replace this function, using notifyAboutDecklist().
  * (currently there is only one function at a time, that can be called. TODO: allow multiple functions at a time)
  */
-let notifyDecklistFunc = () => { };
+let notifyDecklistFunc = () => {};
 
 export function notifyAboutDecklist(func) {
     notifyDecklistFunc = func;
@@ -36,8 +34,8 @@ export function notifyAboutDecklist(func) {
 
 /**
  * Requests a list of all available decks from the server.
- * 
- * When receiving the response, DECKLIST will be updated and notifyDecklistFunc() will be called. 
+ *
+ * When receiving the response, DECKLIST will be updated and notifyDecklistFunc() will be called.
  */
 export function loadDecklist() {
     const url = "/assets/deck_config.json";
@@ -61,9 +59,9 @@ export function loadDecklist() {
 }
 
 /**
- * Uses the path of the deck to request all cards of the deck 
+ * Uses the path of the deck to request all cards of the deck
  * and sets the current deck of the gamestate to the loaded one.
- * 
+ *
  * This request is asynchronous the effect won't be immediately.
  * @param {*} deck
  * @param {*} globalState
@@ -90,10 +88,10 @@ export function loadDeck(deck, globalState, setGlobalState) {
 
 /**
  * Uses the name of the deck to find teh right path and performs loadDeck().
- * 
- * @param {*} name 
- * @param {*} globalState 
- * @param {*} setGlobalState 
+ *
+ * @param {*} name
+ * @param {*} globalState
+ * @param {*} setGlobalState
  */
 export function loadDeckFromName(name, globalState, setGlobalState) {
     const x = DECKLIST.find((dl) => dl.name === name);
@@ -107,19 +105,19 @@ export function loadDeckFromName(name, globalState, setGlobalState) {
 
 /**
  * A deck represents a set of cards in diffrent categories.
- * 
+ *
  * The structure of a deck(data) is:
  * [
  *  //Catgorie
  *  {
- *      
+ *
  *      "name": {string},
  *      "frequency": 0-1,
- * 
+ *
  *      //icon that will be display on the sqaure.
  *      //Use the name of the icon you want: https://react-icons.github.io/react-icons/icons?name=fa
  *      "icon": {string},
- * 
+ *
  *      //List of all cards
  *      "cards" [...]
  *  },
@@ -153,6 +151,25 @@ class Deck {
     }
 
     /**
+     * Get random type/categorie from a deck, to generate the board.
+     *
+     * @returns
+     */
+    randomType() {
+        let selectedTypes;
+
+        do {
+            const ran = Math.random();
+            selectedTypes = this.getTypes()
+                .filter((value) => ran < value.frequency);
+        } while (selectedTypes.length === 0);
+
+        const x =
+            selectedTypes[Math.floor(Math.random() * selectedTypes.length)];
+        return x;
+    }
+
+    /**
      * @returns list of all cards of one category/type
      */
     getCardsByType(type) {
@@ -165,7 +182,7 @@ class Deck {
     }
 
     /**
-     * 
+     *
      * @returns return list of all cards of any category
      */
     getAllCards() {
@@ -175,7 +192,7 @@ class Deck {
     /**
      * Every card has a appearance property, only players in the boundaries of the appearance should get this card.
      * In case there is no card specified for a position, all cards of the same type are considered as possible card.
-     * 
+     *
      * @param {*} type category/type of the card
      * @param {*} position: current position of the source.
      * @param {*} globalState
@@ -195,15 +212,13 @@ class Deck {
         //if no cards of this type are specified, all cards regardless the type will be taken.
         if (cards === undefined || cards.length === 0) {
             cardSet = this.getAllCards();
-        }else {
-            
+        } else {
             const cardsInAppearanceRange = cards.filter(
                 (c) =>
                     c.appearance.lower * boardLength <= position &&
                     c.appearance.upper * boardLength >= position
             );
-    
-            
+
             if (cardsInAppearanceRange.length === 0) {
                 cardSet = cards;
             } else {
@@ -221,11 +236,12 @@ class Deck {
             let selected = [];
             do {
                 const ran = Math.random();
-                selected = cardSet.filter(card => ran < card.frequency);
+                selected = cardSet.filter((card) => ran < card.frequency);
             } while (selected.length === 0);
 
             //select random value from subset
-            const r = Math.random(new Date().getMilliseconds()) * selected.length;
+            const r =
+                Math.random(new Date().getMilliseconds()) * selected.length;
             return selected[Math.floor(r)];
         }
     }

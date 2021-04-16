@@ -41,7 +41,7 @@ const SquareView = ({squareState, bounds, globalState}) => {
         <div className="square" style={style}>
             <div className = "card">
                 <div className="card-content">
-                    <h3>{squareState.index}</h3>
+                    <h3>{squareState.index + 1}</h3>
                     {icon}
                 </div>
                 <div className="card-player-row">

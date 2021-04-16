@@ -21,7 +21,7 @@ const BoardView = ({ globalState, setGlobalState }) => {
     return (
         <div className="board-container" style={{}}>
             <div className="board" style={grid_style}>
-                {toSpiral(
+                {toSnake(
                     globalState.boardState.squares,
                     globalState.boardState.size,
                     globalState
@@ -49,38 +49,29 @@ const BoardView = ({ globalState, setGlobalState }) => {
     );
 };
 
-const BOUND_PIECES = [
-    { up: true, down: true, left: false, right: false },
-    { up: false, down: false, left: true, right: true },
-    { up: true, down: true, left: false, right: false },
-    { up: false, down: false, left: true, right: true },
-];
 
-const BOUND_FIRST_PIECES = [
-    { up: true, down: true, left: false, right: false },
-    { up: true, down: false, left: false, right: true },
-    { up: false, down: true, left: false, right: true },
+const DEFAULT_BOUNDS = { up: true, down: true, left: false, right: false }
+const ROW_LEFT_BOUNDS = [
     { up: false, down: true, left: true, right: false },
-];
+    { up: true, down: false, left: true, right: false  },
+    
+]
+const ROW_RIGHT_BOUNDS = [
+    { up: true, down: false, left: false, right: true  },
+    { up: false, down: true, left: false, right: true}
+]
 
-const BOUND_LAST_PIECES = [
-    { up: true, down: true, left: false, right: false },
-    { up: false, down: false, left: true, right: true },
-    { up: true, down: true, left: false, right: false },
-    { up: true, down: false, left: true, right: false },
-];
-
-function toSpiral(squares, size, globalState) {
-    const createSqView = (sqState, dir, first, last) => {
-        let x = BOUND_PIECES;
-        if (first) x = BOUND_FIRST_PIECES;
-        else if (last) x = BOUND_LAST_PIECES;
+function toSnake(squares, size, globalState) {
+    const createSqView = (sqState, row, column, i) => {
+        let bound = DEFAULT_BOUNDS;
+        if (column === 0 && i !== 0) bound = ROW_LEFT_BOUNDS[row%ROW_LEFT_BOUNDS.length];
+        else if (column === size - 1 && i !== size*size-1) bound = ROW_RIGHT_BOUNDS[row%ROW_RIGHT_BOUNDS.length];
 
         return (
             <SquareView
                 key={sqState.index}
                 squareState={sqState}
-                bounds={x[dir % 4]}
+                bounds={bound}
                 globalState={globalState}
             />
         );
@@ -91,40 +82,16 @@ function toSpiral(squares, size, globalState) {
     for (let i = 0; i < size; i++) {
         bor[i] = Array(size);
     }
-
-    let counter = 0;
-    let counterX = 0;
-    let counterY = 0;
-
-    for (let i = size - 1; i >= 0; i -= 2) {
-        if (i === 0) {
-            bor[counterY][counterX] = createSqView(
-                squares[counter],
-                0,
-                true,
-                true
-            );
-        } else {
-            for (let direction = 0; direction < 4; direction++) {
-                for (let x = 0; x < i; x++) {
-                    bor[counterY][counterX] = createSqView(
-                        squares[counter],
-                        direction,
-                        x === 0,
-                        x === i - 1
-                    );
-                    counter++;
-                    counterX += (-direction + 1) % 2;
-                    counterY += (-direction + 2) % 2;
-                }
-            }
-        }
-
-        counterX++;
-        counterY++;
+    
+    for (let i = 0; i < size * size; i++) {
+        const row = Math.floor(i / size);
+        const column = row % 2 === 0 ? i % size : size - 1 - (i % size)
+        
+        bor[row][column] = createSqView(squares[i], row, column, i)
     }
 
     return bor.flat();
+
 }
 
 export default BoardView;

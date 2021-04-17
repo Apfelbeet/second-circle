@@ -6,6 +6,10 @@
     {
         "name": "Test Deck",
         "path": "testing.json"
+    },
+    {
+        "name": "Drink 'n' Run",
+        "path": "drinknrun.json"
     }
 ]
 

@@ -4,7 +4,7 @@
         "frequency": 1,
         "cards": [
             {
-                "text": "Gehe <n> Felder zurück.",
+                "text": "Gehe <n> Felder zurück. <s>",
                 "actions": [
                     {
                         "type": "moveBack",
@@ -29,6 +29,15 @@
                             "bottom": 1,
                             "top": 6
                         }
+                    },
+                    {
+                        "name": "s",
+                        "type": "randomStringFromList",
+                        "strings": [
+                            "(❁´◡`❁)",
+                            "(╯°□°）╯︵ ┻━┻",
+                            "☜(ﾟヮﾟ☜)"
+                        ]
                     }
                 ]
             },

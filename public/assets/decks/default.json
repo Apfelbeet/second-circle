@@ -731,7 +731,7 @@
     },
     {
         "name": "Curse",
-        "frequency": 0.3,
+        "frequency": 0.5,
         "icon": "FaBiohazard",
         "cards": [
             {

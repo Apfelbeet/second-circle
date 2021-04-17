@@ -176,6 +176,13 @@
  *      //The range of the random number.
  *      "selectors": [selctor]
  * }
+ * 
+ * "randomStringFromList": Picks a random string out of a list.
+ * {
+ *      ...
+ *      //List of strings
+ *      "strings": [string]
+ * }
  *
  * Resolve: A resolved variable has this structure:
  * {
@@ -836,6 +843,33 @@ function resolveVariable(globalState, variable, source) {
                     string: asString,
                 };
             }
+            break;
+        
+        /**
+         * {
+         *  "name": string,
+         *  "type": "randomStringFromList"
+         *  "strings": [string]
+         * }
+         * 
+         * TODO: more general approach (maybe use selectors as list substitute)
+         */
+        case "randomStringFromList":
+            if (variable.strings === undefined) {
+                invalidArgument();
+            } else {
+                console.log(variable)
+                const ran = Math.floor(Math.random() * variable.strings.length)
+                
+                console.log(ran)
+                console.log(variable.strings[ran])
+                return {
+                    name: variable.name,
+                    value: variable.strings[ran],
+                    string: variable.strings[ran]
+                }
+            }
+            
             break;
         default:
             console.error("unkown variable type");

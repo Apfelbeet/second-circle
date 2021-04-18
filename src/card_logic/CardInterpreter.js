@@ -209,6 +209,7 @@
  */
 
 import { actionFromRaw } from "./Action";
+import { shuffleList } from "../util/util";
 
 /**
  * Action that skips to the next player.
@@ -604,13 +605,7 @@ export function resolveSelector(globalState, selector, source, varibales = []) {
                           varibales
                       );
 
-            for (let i = resSelectors.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * resSelectors.length);
-                [resSelectors[i], resSelectors[j]] = [
-                    resSelectors[j],
-                    resSelectors[i],
-                ];
-            }
+            shuffleList(resSelectors);
 
             unfiltered = resSelectors;
             break;

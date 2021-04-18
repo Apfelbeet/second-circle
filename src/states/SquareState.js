@@ -41,7 +41,7 @@ export function getFinishSquare(index) {
  * A random card dependent on the square will be drawn and will be used as active card. 
  */
 const defaultOnArriveFunc = (globalState, square, source) => {
-    const card = CardInterpreter.resolveCard(globalState.deck.getRandomCard(square.type, source.position, globalState), globalState, source);
+    const card = CardInterpreter.resolveCard(globalState.deck.drawCard(square.type, source, globalState), globalState, source);
     return globalState.withActiveCard(card);
 };
 

@@ -1,3 +1,5 @@
+import {shuffleList} from '../util/util'
+
 /**
  * List of all decks there are installed.
  * This list will be overwritten by the loadDecklist() function as soon as the server response to teh request.
@@ -104,6 +106,113 @@ export function loadDeckFromName(name, globalState, setGlobalState) {
 }
 
 /**
+ * drawShuffled is a way to get the cards of an type in random order.
+ * Each key has it own entry, which stores a list of indices mapping to 
+ * the corresponding card in the list of all cards the passed type
+ * and a current index, show to a point in this list.
+ * This pointer shows the next card, that will be drawn.
+ * 
+ * With each call of a key the index/pointer that entry will be used to
+ * draw the next card and will be increased by 1 (or set to zero if the end of the list is reached).
+ * 
+ * If a key is called and the pointer is zero the mapping list will be shuffled.
+ * 
+ * Currently the frequency and appearance property of a card are ignored.
+ * 
+ * @param {Deck} deck 
+ * @param {*} type 
+ * @param {PlayerState} source 
+ * @param {GlobalState} globalState
+ * @param {*} key: will be used to find or store the right entry.
+ * @returns next card
+ */
+const drawShuffled = (deck, type, source, globalState, key) => {
+    //If there is no map, a new map is need.
+    if (deck.drawShuffledMap === undefined) {
+        deck.drawShuffledMap = new Map();
+    }
+
+    if (!deck.drawShuffledMap.has(key)) {
+        deck.drawShuffledMap.set(
+            key,
+            {
+                index: 0,
+                mapping: [...Array(deck.getCardsByType(type).length).keys()]
+            })
+    }
+
+    const entry = deck.drawShuffledMap.get(key);
+    if (entry.mapping.length === 0) {
+        return drawRandom(deck, type, source, globalState);
+    }
+
+    if (entry.index === 0) {
+        shuffleList(entry.mapping);
+    }
+
+    const allCards = deck.getCardsByType(type);
+    const card = allCards[entry.mapping[entry.index]];
+    entry.index = (entry.index + 1) % allCards.length;
+    return card;
+}
+
+/**
+ * Draws a random card of the passed type. It favors cards that are 
+ * allowed at the position of the source, but if it dosn't find such a card,
+ * any other card of this type may be returned. Same applies if there is no
+ * card of the passed type.
+ * 
+ * @param {*} deck 
+ * @param {*} type 
+ * @param {*} source 
+ * @param {*} globalState 
+ * @returns random card of passed type
+ */
+const drawRandom = (deck, type, source, globalState) => {
+    //All cards of a type
+    const cards = deck.getCardsByType(type);
+    const boardLength = globalState.boardState.squares.length;
+
+    //cardSet is the final set of cards that are possible.
+    //There different kinds of sets:
+    //1. Cards of the favored type if they are in the right range of the appearance.
+    //2. All cards of the favored type, if there no cards in 1.
+    //3. All cards regradless of the favored type, if there no cards in 2.
+    let cardSet;
+    //if no cards of this type are specified, all cards regardless the type will be taken.
+    if (cards === undefined || cards.length === 0) {
+        cardSet = deck.getAllCards();
+    } else {
+        const cardsInAppearanceRange = deck.getCardsByTypeAndPosition(type, source.position, boardLength)
+
+        if (cardsInAppearanceRange.length === 0) {
+            cardSet = cards;
+        } else {
+            cardSet = cardsInAppearanceRange;
+        }
+    }
+
+    //After cardSet is defined, a random card gets picked.
+    if (cardSet.length === 1) {
+        return cardSet[0];
+    } else {
+        //selected is a subset of cardSet.
+        //generate random value (0-1), all cards with a bigger frequency property are contained in this subset.
+        //if the subset is empty this process will be repeated until the subset is not empty.
+        let selected = [];
+        do {
+            const ran = Math.random();
+            selected = cardSet.filter((card) => ran < card.frequency);
+        } while (selected.length === 0);
+
+        //select random value from subset
+        const r =
+            Math.random(new Date().getMilliseconds()) * selected.length;
+        return selected[Math.floor(r)];
+    }
+} 
+
+/**
  * A deck represents a set of cards in diffrent categories.
  *
  * The structure of a deck(data) is:
@@ -120,6 +229,9 @@ export function loadDeckFromName(name, globalState, setGlobalState) {
  *
  *      //List of all cards
  *      "cards" [...]
+ * 
+ *      //The order with which the cards are drawn.
+ *      "order": "shuffledGlobal|shuffledIndividual|random"
  *  },
  *  ...
  * ]
@@ -145,6 +257,7 @@ class Deck {
                     frequency:
                         type.frequency === undefined ? 0 : type.frequency,
                     icon: type.icon,
+                    order: type.order
                 };
             })
             .filter((type) => type !== undefined && type.name !== undefined);
@@ -175,10 +288,25 @@ class Deck {
     getCardsByType(type) {
         const cardSet = this.data.find((set) => set.name === type.name);
         if (cardSet === undefined) {
-            console.error("couldn't find card-type: " + type);
+            console.error("couldn't find card type.");
             return undefined;
         }
         return cardSet.cards;
+    }
+
+    /**
+     * 
+     * @param {*} type 
+     * @param {number} position 
+     * @param {number} boardLength 
+     * @returns all cards of that type that can be on this position.
+     */
+    getCardsByTypeAndPosition(type, position, boardLength) {
+        return this.getCardsByType(type).filter(
+            (c) =>
+                c.appearance.lower * boardLength <= position &&
+                c.appearance.upper * boardLength >= position
+        );
     }
 
     /**
@@ -189,60 +317,23 @@ class Deck {
         return this.data.reduce((a, b) => a.concat(b), []);
     }
 
+
     /**
-     * Every card has a appearance property, only players in the boundaries of the appearance should get this card.
-     * In case there is no card specified for a position, all cards of the same type are considered as possible card.
-     *
-     * @param {*} type category/type of the card
-     * @param {*} position: current position of the source.
-     * @param {*} globalState
-     * @returns random card of a categorie
+     * Draws card depending of the players position and square type.
+     * 
+     * @param {*} type 
+     * @param {*} source 
+     * @param {*} globalState 
+     * @returns card
      */
-    getRandomCard(type, position, globalState) {
-        //All cards of a type
-        const cards = this.getCardsByType(type);
-        const boardLength = globalState.boardState.squares.length;
-
-        //cardSet is the final set of cards that are possible.
-        //There different kinds of sets:
-        //1. Cards of the favored type if they are in the right range of the appearance.
-        //2. All cards of the favored type, if there no cards in 1.
-        //3. All cards regradless of the favored type, if there no cards in 2.
-        let cardSet;
-        //if no cards of this type are specified, all cards regardless the type will be taken.
-        if (cards === undefined || cards.length === 0) {
-            cardSet = this.getAllCards();
-        } else {
-            const cardsInAppearanceRange = cards.filter(
-                (c) =>
-                    c.appearance.lower * boardLength <= position &&
-                    c.appearance.upper * boardLength >= position
-            );
-
-            if (cardsInAppearanceRange.length === 0) {
-                cardSet = cards;
-            } else {
-                cardSet = cardsInAppearanceRange;
-            }
-        }
-
-        //After cardSet is defined, a random card gets picked.
-        if (cardSet.length === 1) {
-            return cardSet[0];
-        } else {
-            //selected is a subset of cardSet.
-            //generate random value (0-1), all cards with a bigger frequency property are contained in this subset.
-            //if the subset is empty this process will be repeated until the subset is not empty.
-            let selected = [];
-            do {
-                const ran = Math.random();
-                selected = cardSet.filter((card) => ran < card.frequency);
-            } while (selected.length === 0);
-
-            //select random value from subset
-            const r =
-                Math.random(new Date().getMilliseconds()) * selected.length;
-            return selected[Math.floor(r)];
+    drawCard(type, source, globalState) {
+        switch (type.order) {
+            case "shuffledGlobal":
+                return drawShuffled(this, type, source, globalState, type.name)
+            case "shuffledIndividual":
+                return drawShuffled(this, type, source, globalState, type.name + "|" + source.id)
+            default:
+                return drawRandom(this, type, source, globalState)
         }
     }
 }

@@ -3,6 +3,7 @@
         "name": "Drink",
         "frequency": 0.6,
         "icon": "FaWineBottle",
+        "order": "shuffledIndividual",
         "cards": [
             {
                 "text": "Trinke <n> Schlücke.",
@@ -327,8 +328,9 @@
     },
     {
         "name": "Action",
-        "frequency": 0.6,
+        "frequency": 0.7,
         "icon": "FaWalking",
+        "order": "shuffledIndividual",
         "cards": [
             {
                 "text": "Gehe <n> Felder zurück.",
@@ -731,8 +733,9 @@
     },
     {
         "name": "Curse",
-        "frequency": 0.5,
+        "frequency": 0.7,
         "icon": "FaBiohazard",
+        "order": "shuffledIndividual",
         "cards": [
             {
                 "text": "Redeverbot für alle! Wer zuerst spricht, trinkt.",
@@ -740,12 +743,12 @@
                 "appearance": { "lower": 0, "upper": 1 }
             },
             {
-                "text": "Du darfst die nächsten 2 minuten nur mit unverständlichem Gerede antworten.",
+                "text": "Du darfst die nächsten 2 Minuten nur mit unverständlichem Gerede antworten.",
                 "frequency": 1,
                 "appearance": { "lower": 0, "upper": 1 }
             },
             {
-                "text": "Für die nächsten 10 Minuten braucht jeder deiner Sätze ein \"Bruder\" oder ein \"Wallah\".",
+                "text": "Für die nächsten 2 Runden braucht jeder deiner Sätze ein \"Bruder\" oder ein \"Wallah\".",
                 "frequency": 1,
                 "appearance": { "lower": 0, "upper": 1 }
             },
@@ -847,6 +850,7 @@
         "name": "Blackbox",
         "frequency": 0.1,
         "icon": "FaBoxOpen",
+        "order": "shuffledGlobal",
         "cards": [
             {
                 "text": "Stimmt ab: In wem schlummern die größten kriminellen Energien? Derjenige trinkt.",
@@ -884,6 +888,7 @@
         "name": "Collective",
         "frequency": 1,
         "icon": "FaUsers",
+        "order": "shuffledGlobal",
         "cards": [
             {
                 "text": "Alle, die Herr der Ringe gesehen/gelesen haben, trinken 3.",
@@ -1378,10 +1383,11 @@
         "name": "Stop",
         "frequency": 0.5,
         "icon": "FaBomb",
+        "order": "random",
         "cards": [
             {
                 "text": "Gehe zurück zum Start.",
-                "frequency": 0.6,
+                "frequency": 0.5,
                 "appearance": { "lower": 0, "upper": 1 },
                 "actions": [
                     {
@@ -1419,7 +1425,7 @@
                         "type": "randomInteger",
                         "range": {
                             "bottom": 1,
-                            "top": 20
+                            "top": 12
                         }
                     }
                 ]

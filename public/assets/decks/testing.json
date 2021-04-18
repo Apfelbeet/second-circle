@@ -2,41 +2,25 @@
     {
         "name": "Test",
         "frequency": 1,
+        "order": "shuffledIndividual",
         "cards": [
             {
-                "text": "Gehe <n> Felder zurück. <s>",
-                "actions": [
-                    {
-                        "type": "moveBack",
-                        "offset": {
-                            "type": "variable",
-                            "name": "n"
-                        },
-                        "selectors": [
-                            {
-                                "type": "self"
-                            }
-                        ]
-                    }
-                ],
+                "text": "<x>",
                 "frequency": 1,
                 "appearance": { "lower": 0, "upper": 1 },
                 "variables": [
                     {
-                        "name": "n",
-                        "type": "randomInteger",
-                        "range": {
-                            "bottom": 1,
-                            "top": 6
-                        }
-                    },
-                    {
-                        "name": "s",
-                        "type": "randomStringFromList",
-                        "strings": [
-                            "(❁´◡`❁)",
-                            "(╯°□°）╯︵ ┻━┻",
-                            "☜(ﾟヮﾟ☜)"
+                        "name": "x",
+                        "type": "selectors",
+                        "selectors": [
+                            {
+                                "type":"randomOrderOfSelectors",
+                                "selectors": [
+                                    {
+                                        "type": "all"
+                                    }
+                                ]
+                            }
                         ]
                     }
                 ]

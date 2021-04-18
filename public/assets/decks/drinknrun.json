@@ -2,6 +2,7 @@
     {
         "name": "",
         "frequency": 1,
+        "order": "random",
         "cards": [
             {
                 "text": "Go back <n> squares ψ(｀∇´)ψ",

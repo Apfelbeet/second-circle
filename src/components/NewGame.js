@@ -31,7 +31,7 @@ const NewGame = ({ globalState, setGlobalState }) => {
 
     return (
         <div id="overlay-new-game" className="overlay">
-            <FaTimes className="icon-btn close-btn" onClick={closeOverlay} />
+            <FaTimes className="button close-btn" onClick={closeOverlay} />
             <form className="form" onSubmit={onSubmit}>
                 <div className="form-control">
                     <div className="form-control">
@@ -78,7 +78,7 @@ const NewGame = ({ globalState, setGlobalState }) => {
                         </select>
                     </div>
 
-                    <input type="submit" value="Submit" />
+                    <input type="submit" value="Submit" className="button"/>
                 </div>
             </form>
         </div>

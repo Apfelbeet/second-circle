@@ -5,7 +5,7 @@ const BORDER_ON = "solid";
 const BORDER_OFF = "none";
 
 const SquareView = ({squareState, bounds, globalState}) => {
-    //let style = {width: squareSize, height: squareSize};
+
     let style = {};
     if (squareState.type === START_SQUARE || squareState.type === FINISH_SQUARE) {
         style.borderTopStyle = BORDER_ON;
@@ -27,24 +27,25 @@ const SquareView = ({squareState, bounds, globalState}) => {
     if(SqIconComponentName === undefined) {
         icon = squareState.type.name;
     } else {
-        icon = (<div className = "square-icon">
-            <SqIconComponentName size={ 25}/>
+        icon = (<div>
+            <SqIconComponentName size={ 20}/>
             </div>)
     }
 
-    let playersView = globalState.players.filter((p) => squareState.index === p.position).map((p) => <PlayerFigure key={p.id} playerState={ p }/>)
+    let playersView = globalState.players.filter((p) => squareState.index === p.position).map((p) => <PlayerFigure key={p.id} playerState={p}/>)
     if (playersView.length === 0) {
         playersView = <PlayerFigure />;
     }
 
     return (
-        <div className="square" style={style}>
-            <div className = "card">
-                <div className="card-content">
-                    <h3>{squareState.index + 1}</h3>
+        <div className="board-square" style={style}>
+            <div className = "board-sqaure-inner">
+                <div className="board-sqaure-content">
+                    <h3>{squareState.index}</h3>
                     {icon}
                 </div>
-                <div className="card-player-row">
+                <div/>
+                <div className="board-sqaure-player-row">
                     {playersView}
                 </div>
             </div>
@@ -64,14 +65,14 @@ const PlayerFigure = ({playerState}) => {
     if (playerState === undefined) {
         return (
             <div className="card-player" style={{ color: "#ffffff00", backgroundColor: "#ffffff00" , borderColor: "#ffffff00"}}>
-                <Icons.FaChessPawn />
+                {/*<Icons.FaChessPawn />*/}
             </div>
         )
     }
     
     return (
-        <div className="card-player" style={{ backgroundColor: playerState.getColor() }}>
-            <Icons.FaChessPawn />
+        <div className="card-player" style={{ backgroundColor: playerState.getColor().color, color: playerState.getColor().white ? "var(--white)" : "var(--black)" }}>
+            {/* <Icons.FaChessPawn /> */}
         </div>
         
     )

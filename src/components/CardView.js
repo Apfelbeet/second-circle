@@ -2,23 +2,18 @@ import React from "react";
 import { runOption } from "../card_logic/CardInterpreter";
 
 const CardView = ({ card, globalState, setGlobalState }) => {
-    let c = card;
-    if (c === undefined) {
-        c = { text: "", options: [], source: { name: "", getColor: () => {} } };
-    }
 
     return (
         <>
-            <div className="control-card-content control-card-card">
-                <h3 className = "player-card" style={{backgroundColor: c.source.getColor()}}>{c.source.name}</h3>
-                <div className="control-card-card-body">{c.text}</div>
+            <div className="control-view-body">
+                {card.text}
             </div>
-            <div className="control-card-content">
-                {c.options.map((o) => (
+            <div className="control-view-options">
+                {card.options.map((o) => (
                     <OptionButton
                         key={o.text}
                         option={o}
-                        card_actions={c.actions}
+                        card_actions={card.actions}
                         globalState={globalState}
                         setGlobalState={setGlobalState}
                     />
@@ -36,11 +31,12 @@ const OptionButton = ({
 }) => {
     return (
         <div
-            className="control-card-option icon-btn"
+            className="control-view-option button"
+            key={option.text}
             onClick={() => {
                 onOption(option, card_actions, globalState, setGlobalState);
             }}
-        >
+        >  
             {option.text}
         </div>
     );

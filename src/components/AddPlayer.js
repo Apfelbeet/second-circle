@@ -26,10 +26,10 @@ const AddPlayer = ({ globalState, setGlobalState}) => {
 
     return (
         <div id="overlay-add-player" className="overlay">
-            <FaTimes className="icon-btn close-btn" onClick={closeOverlay} />
+            <FaTimes className="button close-btn" onClick={closeOverlay} />
             <form className='form' onSubmit={onSubmit}>
                 <div className="form-control">
-                    <label >New name</label>
+                    <label >Name</label>
                     <input type="text" value={name} onChange={(e) => { setName(e.target.value) }} />
                     <input type="submit" value="Submit" />
                 </div>

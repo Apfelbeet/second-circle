@@ -4,13 +4,41 @@ let ID = 0;
  * List of all colors players can have.
  */
 const PLAYER_COLORS = [
-    "#F2545B", //red
-    "#2274A5", //blue
-    "#32936F", //green
-    "#FF9000", //yellow
-    "#870058", //purpble
-    "#8C93A8", //gray
-    "#06BEE1", //light blue
+    //red
+    {
+        color: "#F2545B",
+        white: false,
+    },
+    //blue
+    {
+        color: "#2274A5",
+        white: true,
+    },
+    //green
+    {
+        color: "#32936F",
+        white: true,
+    },
+    //yellow
+    {
+        color: "#FF9000",
+        white: false,
+    },
+    //purple
+    {
+        color: "#870058",
+        white: true,
+    },
+    //gray
+    {
+        color: "#8C93A8",
+        white: true,
+    },
+    //light blue
+    {
+        color: "#06BEE1",
+        white: true,
+    },
 
 ]
 

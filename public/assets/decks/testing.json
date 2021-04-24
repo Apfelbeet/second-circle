@@ -32,7 +32,7 @@
                         "text": "Trinke <n>."
                     },
                     {
-                        "text": "Gehe <n> zurück.",
+                        "text": "Gehe <n> zurück. asdasdasda asdas sdasdasd",
                         "actions": [
                             {
                                 "type": "moveBack",

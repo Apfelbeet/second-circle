@@ -1,114 +1,98 @@
 import React from "react";
-import { FaUserPlus, FaRegFile, FaDice } from "react-icons/fa";
+import { FaDice } from "react-icons/fa";
+import * as Icons from "react-icons/fa";
 import { GAME_STATUS } from "../states/GlobalState";
 import CardView from "./CardView";
 
+const DICE_ICONS = ["FaDiceOne", "FaDiceTwo", "FaDiceThree", "FaDiceFour", "FaDiceFive", "FaDiceSix"]
+
 const ControlView = ({ globalState, setGlobalState }) => {
+    let style = {};
+    if (globalState.gameStatus === GAME_STATUS.TURN) {
+        const player = globalState.getCurrentPlayer();
+        style = {
+            color: player.getColor().white ? "var(--white)" : "var(--black)",
+            backgroundColor: player.getColor().color,
+        };
+    } else if (globalState.activeCard !== undefined) {
+        const card = globalState.activeCard;
+        style = {
+            color: card.source.getColor().white
+                ? "var(--white)"
+                : "var(--black)",
+            backgroundColor: card.source.getColor().color,
+        };
+    }
+
     return (
-        <div className="control-view">
-            <div className="control-card">
-                <div className="control-card-header">
-                    <div className="control-card-header-right">
-                        {addPlayerButton(30)}
-                        {newGameButton(globalState, setGlobalState, 30)}
-                    </div>
-                </div>
-                <Content
-                    globalState={globalState}
-                    setGlobalState={setGlobalState}
-                />
-            </div>
+        <div className="control-view" style={style}>
+            <Content
+                globalState={globalState}
+                setGlobalState={setGlobalState}
+            />
         </div>
     );
 };
 
 const Content = ({ globalState, setGlobalState }) => {
-    if (globalState.gameStatus === GAME_STATUS.PRE_INIT) {
-        return (
-            <div className="control-card-big-button control-card-content">
-                {addPlayerButton(150)}
-                <div>Add player</div>
-            </div>
-        );
-    } else if (
-        globalState.gameStatus === GAME_STATUS.INIT ||
-        globalState.gameStatus === GAME_STATUS.FINISHED
-    ) {
-        return (
-            <div className="control-card-big-button control-card-content">
-                {newGameButton(globalState, setGlobalState, 150)}
-                <div>Start new game</div>
-            </div>
-        );
-    } else if (globalState.gameStatus === GAME_STATUS.LOADING) {
-        return <div className="control-card-content">Loading</div>;
+    if (globalState.gameStatus === GAME_STATUS.LOADING) {
+        return <Headline text="Loading" />;
     } else if (globalState.gameStatus === GAME_STATUS.TURN) {
-        const turn_cp =  globalState.getCurrentPlayer()
-        
+        const turn_cp = globalState.getCurrentPlayer();
+
         return (
-            <div className="control-card-grid">
-                <div className="control-card-content">
-                    <span className="player-card" style= {{backgroundColor: turn_cp.getColor()}}>{turn_cp.name}</span>'s turn:
-                </div>
-                <div className="control-card-dice">
+            <>
+                <Headline text={turn_cp.name} />
+                <div className="control-view-body">
                     <FaDice
-                        className="icon-btn icon-btn-padding control-card-content"
+                        className="button "
                         size={75}
                         onClick={() => onDiceRoll(globalState, setGlobalState)}
                     />
                 </div>
-
-                <CardView />
-            </div>
+            </>
         );
     } else if (globalState.gameStatus === GAME_STATUS.IN_TURN) {
-        const inturn_cp =  globalState.getCurrentPlayer()
-        
+        const inturn_cp = globalState.getCurrentPlayer();
+
         return (
-            <div className="control-card-grid">
-                <div className="control-card-content">
-                    <span className="player-card" style= {{backgroundColor: inturn_cp.getColor()}}>{inturn_cp.name}</span>'s turn:
-                </div>
-                <div className="control-card-content">{globalState.dice}</div>
+            <>
+                <Headline text={inturn_cp.name} diceResult={globalState.dice} iconName={ globalState.getSquareByPlayer(globalState.activeCard.source).type.icon}/>
                 <CardView
                     card={globalState.activeCard}
                     globalState={globalState}
                     setGlobalState={setGlobalState}
                 />
-            </div>
-        );
-    } else {
-        return (
-            <div className="control-card-big-button control-card-content">
-                {newGameButton(globalState, setGlobalState, 150)}
-            </div>
+            </>
         );
     }
+
+    return <></>;
 };
 
-const addPlayerButton = (size = 30) => {
-    return (
-        <FaUserPlus
-            className="icon-btn icon-btn-padding"
-            size={size}
-            onClick={() => {
-                document.getElementById("overlay-add-player").style.display =
-                    "block";
-            }}
-        />
-    );
-};
+const Headline = ({ text = "", diceResult, iconName }) => {
+    let diceView;
+    if (diceResult === undefined) {
+        diceView = <></>;
+    } else {
+        const DiceIconName = Icons[DICE_ICONS[diceResult-1]];
+        diceView = <DiceIconName />;
+    }
 
-const newGameButton = (globalState, setGlobalState, size = 30) => {
+    let iconView;
+    if (iconName === undefined || Icons[iconName] === undefined) {
+        iconView = <></>;
+    } else {
+        const IconName = Icons[iconName];
+        iconView = <IconName />;
+    }
+
     return (
-        <FaRegFile
-            className="icon-btn icon-btn-padding"
-            size={size}
-            onClick={() => {
-                document.getElementById("overlay-new-game").style.display =
-                    "block";
-            }}
-        />
+        <div className="control-view-headline">
+            <div className = "control-view-headline-icon"> { iconView}</div>
+            {text}
+            <div className="control-view-headline-dice">{diceView}</div>
+        </div>
     );
 };
 

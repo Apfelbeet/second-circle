@@ -1,11 +1,11 @@
 import SquareView from "./SquareView";
 
 const BoardView = ({ globalState, setGlobalState }) => {
+    //document.querySelector(':root').style.setProperty('--board-visible', globalState.boardVisible ? "auto max-content 1fr auto" : "0 auto 0 0");
 
     if (globalState.boardState === undefined) {
         return <div></div>;
     }
-
 
     const grid_style = {
         display: "grid",
@@ -13,18 +13,21 @@ const BoardView = ({ globalState, setGlobalState }) => {
             "1fr ".repeat(globalState.boardState.size - 1) + "1fr",
     };
 
-    return (
-        <div className = "board-wrapper">
+    const board = globalState.boardVisible ? (
+        <div className="board-wrapper disappear-on-small">
             <div className="board" style={grid_style}>
                 {toSnake(
                     globalState.boardState.squares,
                     globalState.boardState.size,
                     globalState
                 )}
-                </div>
-            
+            </div>
         </div>
+    ) : (
+        <div />
     );
+
+    return board;
 };
 
 const DEFAULT_BOUNDS = { up: true, down: true, left: false, right: false };

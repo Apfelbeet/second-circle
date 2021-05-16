@@ -1,7 +1,7 @@
 import { SquareState, getFinishSquare, getStartSquare } from './SquareState';
 
 export class BoardState {
-
+    
     constructor(size, deck) {
         this.size = size;
         this.deck = deck;

@@ -1,4 +1,4 @@
-import { FaUserPlus, FaRegFile} from "react-icons/fa";
+import { FaUserPlus, FaRegFile, FaEye, FaEyeSlash } from "react-icons/fa";
 
 export const AddPlayerButton = ({ size }) => {
     return (
@@ -11,7 +11,7 @@ export const AddPlayerButton = ({ size }) => {
             }}
         />
     );
-}
+};
 
 export const NewGameButton = ({ size }) => {
     return (
@@ -24,5 +24,26 @@ export const NewGameButton = ({ size }) => {
             }}
         />
     );
-}
+};
 
+export const HideBoardButton = ({ size, globalState, setGlobalState }) => {
+    const icon = globalState.boardVisible ? (
+        <FaEye
+            className="button button-padding disappear-on-small"
+            size={size}
+            onClick={() => {
+                setGlobalState(globalState.withBoardVisible(false));
+            }}
+        />
+    ) : (
+        <FaEyeSlash
+            size={size}
+            className="button button-padding disappear-on-small"
+            onClick={() => {
+                setGlobalState(globalState.withBoardVisible(true));
+            }}
+        />
+    );
+
+    return icon;
+};

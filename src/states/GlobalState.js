@@ -31,7 +31,8 @@ export class GlobalState {
         boardState = undefined,
         deck = undefined,
         onLoaded = undefined,
-        activeCard = undefined
+        activeCard = undefined,
+        boardVisible = true,
     ) {
         /**
          * List of all player states
@@ -78,6 +79,11 @@ export class GlobalState {
          * The active card will be displayed to the players.
          */
         this.activeCard = activeCard;
+
+        /**
+         * Wether the board will be visible or not.
+         */
+        this.boardVisible = boardVisible;
     }
 
     /**
@@ -118,7 +124,8 @@ export class GlobalState {
             this.boardState,
             this.deck,
             this.onLoaded,
-            this.activeCard
+            this.activeCard,
+            this.boardVisible,
         );
     }
 
@@ -342,7 +349,7 @@ export class GlobalState {
     }
 
     /**
-     * Creates new deck with a new deck set.
+     * Creates new state with a new deck set.
      * 
      * @param {Deck} deck 
      * @returns {GlobalState}
@@ -356,6 +363,7 @@ export class GlobalState {
             }
         } else {
             x.deck = deck;
+            x.applyDeckSettings(x, deck);
 
             if (x.onLoaded !== undefined) {
                 x = x.onLoaded(x);
@@ -399,5 +407,29 @@ export class GlobalState {
             player
         );
         return x;
+    }
+
+    /**
+     * Applies all default settings of a deck that affect the current state.
+     * This function will modify the passed state and will not create a new instance.
+     * It shouldn't be used from outside.
+     * 
+     * @param {GlobalState} globalState
+     * @param {Deck} deck
+     */
+    applyDeckSettings(globalState, deck) {
+        globalState.boardVisible = deck.settings.board;
+    }
+
+    /**
+     * Creates new state with a new board visiblility.
+     * 
+     * @param {*} card 
+     * @returns {GlobalState}
+     */
+    withBoardVisible(visible) {
+        const copy = this.copy();
+        copy.boardVisible = visible;
+        return copy
     }
 }

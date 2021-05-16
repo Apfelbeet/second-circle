@@ -19,7 +19,6 @@ https://coolors.co/f2545b-a93f55-19323c-f3f7f0-8c5e58
 
   --fancy-font: 'Arizonia';
   --basic-font: 'Cabin', sans-serif;
-
 }
 
 .screen {
@@ -51,13 +50,13 @@ header {
 }
 
 .header-button-row {
-  display: flex;
+  display: grid;
+  grid-template-columns: max-content 1.5rem max-content max-content;
+  gap: 0.2rem;
   justify-content: right;
   align-items: center;
   margin-right: 1rem;
 }
-
-
 
 /*Body*/
 
@@ -174,7 +173,13 @@ body {
   display: grid;
   grid-template-columns: auto max-content 1fr auto;
   gap: 1rem;
+  padding: 2rem;
+}
 
+.game-view-grid-boardless{
+  display: grid;
+  grid-template-columns: auto max-content 0 auto;
+  gap: 1rem;
   padding: 2rem;
 }
 
@@ -182,8 +187,8 @@ body {
   display: grid;
   grid-template-rows: max-content 5fr max-content;
   gap: 1rem;
-  width: 40rem;
   height: 100%;
+  width: 55rem;
   text-align: center;
 }
 
@@ -304,21 +309,34 @@ body {
 @media screen and (max-width: 1100px) {
   header {
     grid-template-columns: 0 max-content 1fr;
+    font-size: 30pt;
+  }
+
+  .header-button-row {
+    grid-template-columns: 1.5rem max-content max-content;
   }
 
   .board-wrapper {
     display: none;
   }
 
+  .disappear-on-small {
+    display: none;
+  }
+
   .game-view-grid{
-    grid-template-columns: 0 auto 0 0;
-    gap: 0rem;
-  
+    gap: 0;
+    grid-template-columns: 0 1fr 0 0;
   }
 
-  .control-view {
+  .game-view-grid-boardless{
+    gap: 0;
+    grid-template-columns: 0 1fr 0 0;
+  }
 
+  .control-view{
     width: 100%;
-
   }
+
+
 }

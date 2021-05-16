@@ -1,43 +1,48 @@
-[
-    {
-        "name": "",
-        "frequency": 1,
-        "order": "random",
-        "cards": [
-            {
-                "text": "Go back <n> squares ψ(｀∇´)ψ",
-                "actions": [
-                    {
-                        "type": "moveBack",
-                        "offset": {
-                            "type": "variable",
-                            "name": "n"
-                        },
-                        "selectors": [
-                            {
-                                "type": "self"
-                            }
-                        ]
-                    }
-                ],
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 },
-                "variables": [
-                    {
-                        "name": "n",
-                        "type": "randomInteger",
-                        "range": {
-                            "bottom": 1,
-                            "top": 6
+{
+    "settings": {
+        "board" : true
+    },
+    "data": [
+        {
+            "name": "",
+            "frequency": 1,
+            "order": "random",
+            "cards": [
+                {
+                    "text": "Go back <n> squares ψ(｀∇´)ψ",
+                    "actions": [
+                        {
+                            "type": "moveBack",
+                            "offset": {
+                                "type": "variable",
+                                "name": "n"
+                            },
+                            "selectors": [
+                                {
+                                    "type": "self"
+                                }
+                            ]
                         }
-                    }
-                ]
-            },
-            {
-                "text": "Drink []~(￣▽￣)~*",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            }
-        ] 
-    }
-]
+                    ],
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 },
+                    "variables": [
+                        {
+                            "name": "n",
+                            "type": "randomInteger",
+                            "range": {
+                                "bottom": 1,
+                                "top": 5
+                            }
+                        }
+                    ]
+                },
+                {
+                    "text": "Drink []~(￣▽￣)~*",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                }
+            ] 
+        }
+    ]
+}

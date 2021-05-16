@@ -215,8 +215,13 @@ const drawRandom = (deck, type, source, globalState) => {
 /**
  * A deck represents a set of cards in diffrent categories.
  *
- * The structure of a deck(data) is:
- * [
+ * The structure of a deck is:
+ * {
+ *  settings: { 
+ *      //Whether the board is visible or not.
+ *      "board": {boolean}
+ *  },
+ *  data: [
  *  //Catgorie
  *  {
  *
@@ -235,15 +240,24 @@ const drawRandom = (deck, type, source, globalState) => {
  *  },
  *  ...
  * ]
+ * }
+ * 
  */
 class Deck {
-    constructor(data) {
-        if (data === undefined) {
-            console.error("clouldn't load deck");
+    constructor(deck) {
+        if (deck === undefined || deck.data === undefined) {
+            console.error("couldn't load deck");
             return;
         }
 
-        this.data = data;
+        this.data = deck.data;
+        this.settings = deck.settings;
+        if (this.settings === undefined || typeof this.settings !== "object") {
+            this.settings = {};
+        }
+        if (this.settings.board === undefined || typeof this.settings.board !== "boolean") {
+            this.settings.board = true;
+        }
     }
 
     /**

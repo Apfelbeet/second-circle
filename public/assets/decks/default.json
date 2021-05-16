@@ -1,1435 +1,1441 @@
-[
-    {
-        "name": "Drink",
-        "frequency": 0.6,
-        "icon": "FaWineBottle",
-        "order": "shuffledIndividual",
-        "cards": [
-            {
-                "text": "Trinke <n> Schlücke.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 },
-                "variables": [
-                    {
-                        "type": "randomInteger",
-                        "name": "n",
-                        "range": {
-                            "bottom": 1,
-                            "top": 5
-                        }
-                    }
-                ]
-            },
-            {
-                "text": "Du entscheidest: Entweder trinkst du einen Schluck oder alle anderen.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Trinke so viele Schlücke, wie du gewüfelt hast.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Alle Raucher trinken.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Alle mit Haustieren trinken.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Alle ohne Haustiere trinken.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Wer am meisten im Glas hat trinkt.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "<randomPlayer> trinkt.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 },
-                "variables": [
-                    {
-                        "name": "randomPlayer",
-                        "type": "selectors",
-                        "selectors": [
-                            {
-                                "type": "randomPlayer"
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "text": "Erkläre die Anomalie des Wassers, wenn du es nicht kannst trinkst du.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Die Person die als letztes dem Abend zugestoßen ist trinkt. (Zu spät kommen ist uncool 😎)",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Trinke <n> Schlücke und halte eine Dankesrede.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 },
-                "variables": [
-                    {
-                        "name": "n",
-                        "type": "randomInteger",
-                        "range": { "bottom": 3, "top": 5 }
-                    }
-                ]
-            },
-            {
-                "text": "Erkläre den Unterschied zwischen das Gleiche und das Selbe. Kannst du es nicht trinkst du.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-
-            {
-                "text": "Wenn du schonmal im Zusammenhang mit einem Clubaufenthalt gekotzt hast, trink.",
-                "frequency": 0.4,
-                "appearance": { "lower": 0.8, "upper": 1 }
-            },
-            {
-                "text": "Nenne jede Person beim Nachnamen, für jeden Fehler trinkst du.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Cannabis ist kein Brokkoli. Trinke, wenn du kiffst.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Nenne eine Serie, wenn mehr als die Hälfte der anderen sie gut finden, darfst du 4 Schlücke verteilen, wenn nicht trinkst du selber!",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "An der LMU studieren nur Einfaltspinsel. Trinke wenn du an der LMU bist.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Nur Loser studieren an der TUM. Trink wenn du ein Loser bist!",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Trink so viele Schlücke, wie du Apple Geräte besitzt/besessen hast.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Schachspielen ist für Nerds. Wenn du Beschützer*in deiner Jungfräulichkeit bist trinkst du!",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Trink so oft, wie du in den letzten 3 Tagen Zähne geputzt hast.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Der freie Markt hat gesprochen. Jugan, Eric und Fredi trinken 5.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Wenn du weißt wer Mia Khalifa ist trinkst du 4.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Wenn du unironisch das Wort Bruder benutzt, trinkst du 3.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Trink 5, wenn du Mate magst, du Student!",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Wenn du eine gerade Zahl gewüfelt hast, dann trinkst du, ansonsten trinken alle anderen.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Such dir die hübscheste Person aus. Diese trinkt mit dir <n>.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 },
-                "variables": [
-                    {
-                        "name": "n",
-                        "type": "randomInteger",
-                        "range": { "bottom": 1, "top": 5 }
-                    }
-                ]
-            },
-            {
-                "text": "Trinke dein Glas leer wenn dieses weniger als 50% Inhalt hat.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "<player> trinkt <n>",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 },
-                "variables": [
-                    {
-                        "name": "n",
-                        "type": "randomInteger",
-                        "range": { "bottom": 1, "top": 5 }
-                    },
-                    {
-                        "name": "player",
-                        "type": "selectors",
-                        "selectors": [
-                            {
-                                "type": "randomPlayer"
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "text": "Der Schwachtrinker der Runde trinkt <n>.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 },
-                "variables": [
-                    {
-                        "name": "n",
-                        "type": "randomInteger",
-                        "range": { "bottom": 1, "top": 5 }
-                    }
-                ]
-            },
-            {
-                "text": "Du trinkst und deine beiden Nachbarn.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Bestimme einen Spieler der mit <player> trinkt.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 },
-                "variables": [
-                    {
-                        "name": "player",
-                        "type": "selectors",
-                        "selectors": [
-                            {
-                                "type": "randomPlayer",
-                                "self": false
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "text": "Das Mädchen deiner Wahl trinkt.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Trink die Anzahl der Monate seitdem du kein Sex hattest.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Trinke und iss etwas.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Trinke ohne dass deine Hände dabei das Glas berühren.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Trink einen, danach trink nochmal einen für das zweite Bein. Männer trinken noch einen fürs dritte Bein.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Alle außer dir trinken.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Trink <n> Schlücke und <player> trinkt das doppelte.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 },
-                "variables": [
-                    {
-                        "name": "n",
-                        "type": "randomInteger",
-                        "range": { "bottom": 1, "top": 5 }
-                    },
-                    {
-                        "name": "player",
-                        "type": "selectors",
-                        "selectors": [
-                            {
-                                "type": "randomPlayer",
-                                "self": false
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "text": "Trink und beleidige eine Person deiner Wahl.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Derjenige dem der PC gehört trinkt.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "<player> ist viel zu nüchtern. Zur Strafe trinkt er/sie <n> Schlücke.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 },
-                "variables": [
-                    {
-                        "name": "n",
-                        "type": "randomInteger",
-                        "range": { "bottom": 1, "top": 5 }
-                    },
-                    {
-                        "name": "player",
-                        "type": "selectors",
-                        "selectors": [
-                            {
-                                "type": "randomPlayer"
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "text": "Such dir selber einen Grund warum du trinken musst.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            }
-        ]
+{
+    "settings": {
+        "board": true
     },
-    {
-        "name": "Action",
-        "frequency": 0.7,
-        "icon": "FaWalking",
-        "order": "shuffledIndividual",
-        "cards": [
-            {
-                "text": "Gehe <n> Felder zurück.",
-                "actions": [
-                    {
-                        "type": "moveBack",
-                        "offset": {
-                            "type": "variable",
-                            "name": "n"
-                        },
-                        "selectors": [
-                            {
-                                "type": "self"
+    "data": [
+        {
+            "name": "Drink",
+            "frequency": 0.6,
+            "icon": "FaWineBottle",
+            "order": "shuffledIndividual",
+            "cards": [
+                {
+                    "text": "Trinke <n> Schlücke.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 },
+                    "variables": [
+                        {
+                            "type": "randomInteger",
+                            "name": "n",
+                            "range": {
+                                "bottom": 1,
+                                "top": 5
                             }
-                        ]
-                    }
-                ],
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 },
-                "variables": [
-                    {
-                        "name": "n",
-                        "type": "randomInteger",
-                        "range": {
-                            "bottom": 1,
-                            "top": 6
                         }
-                    }
-                ]
-            },
-            {
-                "text": "Trinke <n> Schlücke oder gehe <n> Felder zurück.",
-                "options": [
-                    {
-                        "text": "Trinke <n>."
-                    },
-                    {
-                        "text": "Gehe <n> zurück.",
-                        "actions": [
-                            {
-                                "type": "moveBack",
-                                "offset": {
-                                    "type": "variable",
-                                    "name": "n"
-                                },
-                                "selectors": [
-                                    {
-                                        "type": "self"
+                    ]
+                },
+                {
+                    "text": "Du entscheidest: Entweder trinkst du einen Schluck oder alle anderen.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Trinke so viele Schlücke, wie du gewüfelt hast.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Alle Raucher trinken.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Alle mit Haustieren trinken.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Alle ohne Haustiere trinken.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Wer am meisten im Glas hat trinkt.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "<randomPlayer> trinkt.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 },
+                    "variables": [
+                        {
+                            "name": "randomPlayer",
+                            "type": "selectors",
+                            "selectors": [
+                                {
+                                    "type": "randomPlayer"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "text": "Erkläre die Anomalie des Wassers, wenn du es nicht kannst trinkst du.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Die Person die als letztes dem Abend zugestoßen ist trinkt. (Zu spät kommen ist uncool 😎)",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Trinke <n> Schlücke und halte eine Dankesrede.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 },
+                    "variables": [
+                        {
+                            "name": "n",
+                            "type": "randomInteger",
+                            "range": { "bottom": 3, "top": 5 }
+                        }
+                    ]
+                },
+                {
+                    "text": "Erkläre den Unterschied zwischen das Gleiche und das Selbe. Kannst du es nicht trinkst du.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+    
+                {
+                    "text": "Wenn du schonmal im Zusammenhang mit einem Clubaufenthalt gekotzt hast, trink.",
+                    "frequency": 0.4,
+                    "appearance": { "lower": 0.8, "upper": 1 }
+                },
+                {
+                    "text": "Nenne jede Person beim Nachnamen, für jeden Fehler trinkst du.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Cannabis ist kein Brokkoli. Trinke, wenn du kiffst.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Nenne eine Serie, wenn mehr als die Hälfte der anderen sie gut finden, darfst du 4 Schlücke verteilen, wenn nicht trinkst du selber!",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "An der LMU studieren nur Einfaltspinsel. Trinke wenn du an der LMU bist.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Nur Loser studieren an der TUM. Trink wenn du ein Loser bist!",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Trink so viele Schlücke, wie du Apple Geräte besitzt/besessen hast.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Schachspielen ist für Nerds. Wenn du Beschützer*in deiner Jungfräulichkeit bist trinkst du!",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Trink so oft, wie du in den letzten 3 Tagen Zähne geputzt hast.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Der freie Markt hat gesprochen. Jugan, Eric und Fredi trinken 5.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Wenn du weißt wer Mia Khalifa ist trinkst du 4.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Wenn du unironisch das Wort Bruder benutzt, trinkst du 3.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Trink 5, wenn du Mate magst, du Student!",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Wenn du eine gerade Zahl gewüfelt hast, dann trinkst du, ansonsten trinken alle anderen.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Such dir die hübscheste Person aus. Diese trinkt mit dir <n>.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 },
+                    "variables": [
+                        {
+                            "name": "n",
+                            "type": "randomInteger",
+                            "range": { "bottom": 1, "top": 5 }
+                        }
+                    ]
+                },
+                {
+                    "text": "Trinke dein Glas leer wenn dieses weniger als 50% Inhalt hat.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "<player> trinkt <n>",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 },
+                    "variables": [
+                        {
+                            "name": "n",
+                            "type": "randomInteger",
+                            "range": { "bottom": 1, "top": 5 }
+                        },
+                        {
+                            "name": "player",
+                            "type": "selectors",
+                            "selectors": [
+                                {
+                                    "type": "randomPlayer"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "text": "Der Schwachtrinker der Runde trinkt <n>.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 },
+                    "variables": [
+                        {
+                            "name": "n",
+                            "type": "randomInteger",
+                            "range": { "bottom": 1, "top": 5 }
+                        }
+                    ]
+                },
+                {
+                    "text": "Du trinkst und deine beiden Nachbarn.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Bestimme einen Spieler der mit <player> trinkt.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 },
+                    "variables": [
+                        {
+                            "name": "player",
+                            "type": "selectors",
+                            "selectors": [
+                                {
+                                    "type": "randomPlayer",
+                                    "self": false
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "text": "Das Mädchen deiner Wahl trinkt.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Trink die Anzahl der Monate seitdem du kein Sex hattest.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Trinke und iss etwas.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Trinke ohne dass deine Hände dabei das Glas berühren.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Trink einen, danach trink nochmal einen für das zweite Bein. Männer trinken noch einen fürs dritte Bein.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Alle außer dir trinken.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Trink <n> Schlücke und <player> trinkt das doppelte.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 },
+                    "variables": [
+                        {
+                            "name": "n",
+                            "type": "randomInteger",
+                            "range": { "bottom": 1, "top": 5 }
+                        },
+                        {
+                            "name": "player",
+                            "type": "selectors",
+                            "selectors": [
+                                {
+                                    "type": "randomPlayer",
+                                    "self": false
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "text": "Trink und beleidige eine Person deiner Wahl.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Derjenige dem der PC gehört trinkt.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "<player> ist viel zu nüchtern. Zur Strafe trinkt er/sie <n> Schlücke.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 },
+                    "variables": [
+                        {
+                            "name": "n",
+                            "type": "randomInteger",
+                            "range": { "bottom": 1, "top": 5 }
+                        },
+                        {
+                            "name": "player",
+                            "type": "selectors",
+                            "selectors": [
+                                {
+                                    "type": "randomPlayer"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "text": "Such dir selber einen Grund warum du trinken musst.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                }
+            ]
+        },
+        {
+            "name": "Action",
+            "frequency": 0.7,
+            "icon": "FaWalking",
+            "order": "shuffledIndividual",
+            "cards": [
+                {
+                    "text": "Gehe <n> Felder zurück.",
+                    "actions": [
+                        {
+                            "type": "moveBack",
+                            "offset": {
+                                "type": "variable",
+                                "name": "n"
+                            },
+                            "selectors": [
+                                {
+                                    "type": "self"
+                                }
+                            ]
+                        }
+                    ],
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 },
+                    "variables": [
+                        {
+                            "name": "n",
+                            "type": "randomInteger",
+                            "range": {
+                                "bottom": 1,
+                                "top": 6
+                            }
+                        }
+                    ]
+                },
+                {
+                    "text": "Trinke <n> Schlücke oder gehe <n> Felder zurück.",
+                    "options": [
+                        {
+                            "text": "Trinke <n>."
+                        },
+                        {
+                            "text": "Gehe <n> zurück.",
+                            "actions": [
+                                {
+                                    "type": "moveBack",
+                                    "offset": {
+                                        "type": "variable",
+                                        "name": "n"
+                                    },
+                                    "selectors": [
+                                        {
+                                            "type": "self"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 },
+                    "variables": [
+                        {
+                            "name": "n",
+                            "type": "randomInteger",
+                            "range": {
+                                "bottom": 3,
+                                "top": 5
+                            }
+                        }
+                    ]
+                },
+                {
+                    "text": "Wähle eine Kategorie, die erste Person, der nichts mehr einfällt, trinkt 3 Schlücke.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Erzähle eine peinliche Geschichte, die erste Person, die lacht muss trinken.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Schere, Stein, Papier mit <p>. Der Verlierer geht 3 Schritte zurück.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 },
+                    "variables": [
+                        {
+                            "name": "p",
+                            "type": "selectors",
+                            "selectors": [
+                                {
+                                    "type": "indexOffset",
+                                    "offset": 1,
+                                    "selectors": [{ "type": "self" }]
+                                }
+                            ]
+                        },
+                        {
+                            "name": "self",
+                            "type": "selectors",
+                            "selectors": [
+                                {
+                                    "type": "self"
+                                }
+                            ]
+                        }
+                    ],
+                    "options": [
+                        {
+                            "text": "<self> hat gewonnen.",
+                            "actions": [
+                                {
+                                    "type": "moveBack",
+                                    "offset": 3,
+                                    "selectors": {
+                                        "type": "variable",
+                                        "name": "p"
                                     }
-                                ]
-                            }
-                        ]
-                    }
-                ],
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 },
-                "variables": [
-                    {
-                        "name": "n",
-                        "type": "randomInteger",
-                        "range": {
-                            "bottom": 3,
-                            "top": 5
-                        }
-                    }
-                ]
-            },
-            {
-                "text": "Wähle eine Kategorie, die erste Person, der nichts mehr einfällt, trinkt 3 Schlücke.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Erzähle eine peinliche Geschichte, die erste Person, die lacht muss trinken.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Schere, Stein, Papier mit <p>. Der Verlierer geht 3 Schritte zurück.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 },
-                "variables": [
-                    {
-                        "name": "p",
-                        "type": "selectors",
-                        "selectors": [
-                            {
-                                "type": "indexOffset",
-                                "offset": 1,
-                                "selectors": [{ "type": "self" }]
-                            }
-                        ]
-                    },
-                    {
-                        "name": "self",
-                        "type": "selectors",
-                        "selectors": [
-                            {
-                                "type": "self"
-                            }
-                        ]
-                    }
-                ],
-                "options": [
-                    {
-                        "text": "<self> hat gewonnen.",
-                        "actions": [
-                            {
-                                "type": "moveBack",
-                                "offset": 3,
-                                "selectors": {
-                                    "type": "variable",
-                                    "name": "p"
                                 }
-                            }
-                        ]
-                    },
-                    {
-                        "text": "<p> hat gewonnen.",
-                        "actions": [
-                            {
-                                "type": "moveBack",
-                                "offset": 3,
-                                "selectors": {
-                                    "type": "variable",
-                                    "name": "self"
-                                }
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "text": "Zeige deinen besten Tanz-move.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Mache eine Person in der Runde nach, die anderen müssen erraten wer du bist. Wer es zuerst errät verteilt 2 Schlücke.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Filmzitate: jeder nennt ein Zitat falls sich zwei Leute sich auf den selben Film / Filmreihe beziehen trinken alle.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Mache einen Promi nach, die Person die dich als erstes erkennt, verteilt 4 Schlücke.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Lies den letzten Eintrag in deinen Notizen vor.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Lies die letzte Nachricht vor, die du bekommen hast.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Welche 2 Personen würdest du für einen 3er auswählen? Die Auserwählten trinken.",
-                "frequency": 1,
-                "appearance": { "lower": 0.4, "upper": 1 }
-            },
-            {
-                "text": "Nenne den Mittelnamen von 4 Personen. Für jede weiteren darfst du 2 Schlücke verteilen. (weniger als 4 => Trinken)",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "187 4 Life - Für jedes genannte Lied verteilst du 1 Schluck (max.10)",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Gehe zurück auf Start.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 },
-                "actions": [
-                    {
-                        "type": "moveBack",
-                        "offset": 99999,
-                        "selectors": [
-                            {
-                                "type": "self"
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "text": "Trink so viel wie du gewürfelst hast und gehe auf Start.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 },
-                "actions": [
-                    {
-                        "type": "moveBack",
-                        "offset": 99999,
-                        "selectors": [
-                            {
-                                "type": "self"
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "text": "Ich packe mein Koffer mit Alkoholsorten. Der Verlierer trinkt 10.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Lass dich von <player> beleidigen.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 },
-                "variables": [
-                    {
-                        "name": "player",
-                        "type": "selectors",
-                        "selectors": [
-                            {
-                                "type": "randomPlayer",
-                                "self": false
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "text": "Schicke jemandem ein krasses Bild auf WhatsApp.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Beledige deinen linken Nachbar auf Russisch.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Du erzählst einen Witz, jeder, der lacht, trinkt. Wenn keiner lacht trinkst du 3.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Beleidige die Mutter von <player> oder trink <n>.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 },
-                "variables": [
-                    {
-                        "name": "player",
-                        "type": "selectors",
-                        "selectors": [
-                            {
-                                "type": "randomPlayer",
-                                "self": false
-                            }
-                        ]
-                    },
-                    {
-                        "name": "n",
-                        "type": "randomInteger",
-                        "range": {"top": 5, "bottom": 1}
-                    }
-                ]
-            },
-            {
-                "text": "Sag wer die hässlichste Person in der Runde ist oder trink <n>.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 },
-                "variables": [
-                    {
-                        "name": "n",
-                        "type": "randomInteger",
-                        "range": {"top": 5, "bottom": 1}
-                    }
-                ]
-            },
-            {
-                "text": "Mache <player> ein Kompliment.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 },
-                "variables": [
-                    {
-                        "name": "player",
-                        "type": "selectors",
-                        "selectors": [
-                            {
-                                "type": "randomPlayer",
-                                "self": false
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "text": "Erzähle eine peinliche Sex Geschichte.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Ruf deine Mutter an und sag ihr, wie lieb du sie hast, oder trinke 3.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Wie alt war dein ältester Sex Partner?",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Wann hast du das letzte mal gekotzt?",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Sag wer die hübschseste Person in der Runde ist oder trink <n>.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 },
-                "variables": [
-                    {
-                        "name": "n",
-                        "type": "randomInteger",
-                        "range": {"top": 5, "bottom": 1}
-                    }
-                ]
-            },
-            {
-                "text": "Erzähle <player> ein Geheimnis.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 },
-                "variables": [
-                    {
-                        "name": "player",
-                        "type": "selectors",
-                        "selectors": [
-                            {
-                                "type": "randomPlayer",
-                                "self": false
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "text": "Jeder sagt reihum Pornoseiten, wer keine kennt trinkt 4.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Reihum sagt jeder ein polnisches Wort, jeder der keins kennt trinkt <n>.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 },
-                "variables": [
-                    {
-                        "name": "n",
-                        "type": "randomInteger",
-                        "range": {
-                            "bottom": 1,
-                            "top": 5
-                        }
-                    }
-                ]
-            },
-            {
-                "text": "Du musst ein Lied von den Spice-Girls zum besten geben.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Jeder sagt amerikanische Präsidenten, wer keinen mehr weiß, muss trinken.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Erzähl ne Kifferstory von dir.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Was ist deine Lieblingsdroge?",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "10 Liegestütz oder <n> Schlücke?",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 },
-                "variables": [
-                    {
-                        "name": "n",
-                        "type": "randomInteger",
-                        "range": {"top": 5, "bottom": 1}
-                    }
-                ]
-            } 
-        ]
-    },
-    {
-        "name": "Curse",
-        "frequency": 0.7,
-        "icon": "FaBiohazard",
-        "order": "shuffledIndividual",
-        "cards": [
-            {
-                "text": "Redeverbot für alle! Wer zuerst spricht, trinkt.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Du darfst die nächsten 2 Minuten nur mit unverständlichem Gerede antworten.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Für die nächsten 2 Runden braucht jeder deiner Sätze ein \"Bruder\" oder ein \"Wallah\".",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Suche dir einen Drink-Mate aus.",
-                "frequency": 0.2,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Rede die nächsten 3 Runden nur in veralteter Jugendsprache.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Trink bei den nächsten <n> Aufgaben mit.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 },
-                "variables": [
-                    {
-                        "type": "randomInteger",
-                        "name": "n",
-                        "range": { "bottom": 3, "top": 5 }
-                    }
-                ]
-            },
-            {
-                "text": "Denke dir eine Trinkregel aus. Bei Verstoß muss getrunken werden.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Suche dir ein Wort aus. Bis du das nächste mal dran bist, darfst du nur dieses Wort sagen.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Der nächste, der etwas Dummes sagt, trinkt 8.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Der nächste, der lacht, trinkt.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Die erste Person, die raucht trinkt 5.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Setz dich 1 Runde auf den Boden.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Der/die erste der sein Smartphone berührt trinkt 3.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "10 Minuten WC-Verbot für alle.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Du musst diese Spielrunde stehen.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Spiele eine Runde lang mit geschlossenen Augen.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Trinke ein Schluck und halte diesen 1 Runde im Mund.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Schalte für 5 Minuten das Licht aus.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Alle lächeln. Wer als Ertses aufhört, der trinkt.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Du darfst die nächsten 10 Minuten keine Fragen beantworten, sonst trinkst du.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            }
-        ]
-    },
-    {
-        "name": "Blackbox",
-        "frequency": 0.1,
-        "icon": "FaBoxOpen",
-        "order": "shuffledGlobal",
-        "cards": [
-            {
-                "text": "Stimmt ab: In wem schlummern die größten kriminellen Energien? Derjenige trinkt.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Stimmt ab: Wenn der Abend ein Horrorfilm wäre, wer würde zuerst abkratzen? Derjenige trinkt.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Stimmt ab: Wer würde am ehesten einen ONS haben? Derjenige trinkt.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Stimmt ab: Wer wird als erstes Mutter/Vater? Derjenige trinkt.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Stimmt ab: Wer holt am ehesten die Gewichte für die Wasserwaage? Derjenige trinkt.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Stimmt ab: Wer schaut heute zu tief ins Glas? Derjenige Ext!",
-                "frequency": 0.6,
-                "appearance": { "lower": 0.7, "upper": 1 }
-            }
-        ]
-    },
-    {
-        "name": "Collective",
-        "frequency": 1,
-        "icon": "FaUsers",
-        "order": "shuffledGlobal",
-        "cards": [
-            {
-                "text": "Alle, die Herr der Ringe gesehen/gelesen haben, trinken 3.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Jeder der schonmal Geld beim Gambling verloren hat, trinkt.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Alle die im Landkreis wohnen trinken. Ihr Bauernfünfer!",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Wer nicht weiß, wie man die Entwickleroptionen am Handy aktiviert, trinkt.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Alle mit kurzen Haaren trinken.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Alle mit langen Haaren trinken.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Alle, die Matthias heißen, trinken.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Alle, die eine Jeans tragen, trinken.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Alle, die keine Brillen oder Kontaklinsen tragen, trinken.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Alle jünger als <n> trinken.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 },
-                "variables": [
-                    {
-                        "name": "n",
-                        "type": "randomInteger",
-                        "range": { "bottom": 18, "top": 23 }
-                    }
-                ]
-            },
-            {
-                "text": "Alle mit einem Tattoo trinken.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Alle mit einer <n> im Geburtsdatum trinken.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 },
-                "variables": [
-                    {
-                        "type": "randomInteger",
-                        "name": "n",
-                        "range": {
-                            "bottom": 0,
-                            "top": 9
-                        }
-                    }
-                ]
-            },
-            {
-                "text": "Alle, die eine Jogginghose tragen, trinken.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Alle trinken.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Alle mit Geschwistern trinken.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Alle ohne Geschwister trinken.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Alle m trinken.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Alle w trinken.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Alle, die Corona hatten, trinken.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Alle über 1,<size>5m trinken.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 },
-                "variables": [
-                    {
-                        "name": "size",
-                        "type": "randomInteger",
-                        "range": {
-                            "bottom": 6,
-                            "top": 9
-                        }
-                    }
-                ]
-            },
-            {
-                "text": "Abstimmung: Sommer oder Winter? Die Minderheit trinkt.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Stimmt ab: Bierpong oder Flunkyball? Die Minderheit trinkt.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Alle die Spongebob nicht mögen trinken.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Alle mit mehr als <n> im Handy gespeicherten Weckern trinken.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 },
-                "variables": [
-                    {
-                        "name": "n",
-                        "type": "randomInteger",
-                        "range": { "bottom": 3, "top": 10 }
-                    }
-                ]
-            },
-            {
-                "text": "Jeder der Körbchengrösse 75b oder größer hat trinkt.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Alle ohne Feuerzeug trinken.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Wer etwas verschüttet hat trinkt <n>.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 },
-                "variables": [
-                    {
-                        "name": "n",
-                        "type": "randomInteger",
-                        "range": { "bottom": 1, "top": 5 }
-                    }
-                ]
-            },
-            {
-                "text": "Es trinken die Personen die am nächsten dem Start/Ziel sind.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Alle die 2D- und Flash-Games feiern trinken <n>.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 },
-                "variables": [
-                    {
-                        "name": "n",
-                        "type": "randomInteger",
-                        "range": { "bottom": 1, "top": 5 }
-                    }
-                ]
-            },
-            {
-                "text": "Alle Leauge of Legends (inkl. TFT und ARAM) Begeisterten trinken 5.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Es trinken die, die ein ungerades Alter haben.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Pärchen trinken <n>.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 },
-                "variables": [
-                    {
-                        "name": "n",
-                        "type": "randomInteger",
-                        "range": { "bottom": 1, "top": 5 }
-                    }
-                ]
-            },
-            {
-                "text": "Wer heute in der Schule/Arbeit war trinkt.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Alle trinken einen auf das gute Spiel.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Wer Facebook hat trinkt.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Erfinde einen Trinkspruch, zu dem alle trinken.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Alle die noch nie Sex im Auto hatten trinken <n>.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 },
-                "variables": [
-                    {
-                        "name": "n",
-                        "type": "randomInteger",
-                        "range": { "bottom": 1, "top": 5 }
-                    }
-                ]
-            },
-            {
-                "text": "Alle hübschen Frauen trinken. Wenn keine trinkt, trinken alle Frauen.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Alle die noch nie Sex mit Ü30-jährigen hatten trinken <n>.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 },
-                "variables": [
-                    {
-                        "name": "n",
-                        "type": "randomInteger",
-                        "range": { "bottom": 1, "top": 5 }
-                    }
-                ]
-            },
-            {
-                "text": "Jeder der eine schwarze Unterhose trägt trinkt <n>.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 },
-                "variables": [
-                    {
-                        "name": "n",
-                        "type": "randomInteger",
-                        "range": { "bottom": 1, "top": 5 }
-                    }
-                ]
-            },
-            {
-                "text": "Alle trinken <n> außer <player>, der trinkt die Anzahl der Mitspieler und zwar doppelt.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 },
-                "variables": [
-                    {
-                        "name": "n",
-                        "type": "randomInteger",
-                        "range": { "bottom": 1, "top": 5 }
-                    },
-                    {
-                        "name": "player",
-                        "type": "selectors",
-                        "selectors": [
-                            {
-                                "type": "randomPlayer"
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "text": "Jeder der heute noch nicht gekackt hat trinkt 5.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Wer Techno mag, der trinkt.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Singles trinken <n>.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 },
-                "variables": [
-                    {
-                        "name": "n",
-                        "type": "randomInteger",
-                        "range": { "bottom": 1, "top": 5 }
-                    }
-                ]
-            },
-            {
-                "text": "Alle Deutsche die in Amerika aufgewachsen sind trinken.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Jeder der noch nie in nem Stripclub war trinkt.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Alle Nichtraucher trinken.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Jeder der WhatsApp hat trinkt.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Wer seine Zunge nicht rollen kann trinkt.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Alle die sich mal was gebrochen haben trinken.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Alle die noch nie Sex in der Dusche hatten trinken <n>.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 },
-                "variables": [
-                    {
-                        "name": "n",
-                        "type": "randomInteger",
-                        "range": { "bottom": 1, "top": 5 }
-                    }
-                ]
-            },
-            {
-                "text": "Alle die diesen Monat Geburtstag haben oder hatten trinken <n>.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 },
-                "variables": [
-                    {
-                        "name": "n",
-                        "type": "randomInteger",
-                        "range": { "bottom": 1, "top": 5 }
-                    }
-                ]
-            },
-            {
-                "text": "Gelegenheitsraucher trinken <n>.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 },
-                "variables": [
-                    {
-                        "name": "n",
-                        "type": "randomInteger",
-                        "range": { "bottom": 1, "top": 5 }
-                    }
-                ]
-            },
-            {
-                "text": "Jeder der kein Internet Explorer benutzt trinkt.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Alle die betrunken sind trinken.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Alle, die etwas Rotes an haben trinken.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Dieses Spiel ist ab 18 Minderjährige trinken zur Strafe <n>.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 },
-                "variables": [
-                    {
-                        "name": "n",
-                        "type": "randomInteger",
-                        "range": { "bottom": 1, "top": 5 }
-                    }
-                ]
-            },
-            {
-                "text": "Jeder der Firefox benutzt trinkt <n>.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 },
-                "variables": [
-                    {
-                        "name": "n",
-                        "type": "randomInteger",
-                        "range": { "bottom": 1, "top": 5 }
-                    }
-                ]
-            },
-            {
-                "text": "Jeder, der noch nie in Amerika war trinkt.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Alle die Kopfhörer mit LEDs haben trinken.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Alle mit geradem Alter trinken.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Jeder der diesen Monat von Alkohol gekotzt hat trinkt <n>.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 },
-                "variables": [
-                    {
-                        "name": "n",
-                        "type": "randomInteger",
-                        "range": { "bottom": 1, "top": 5 }
-                    }
-                ]
-            },
-            {
-                "text": "Alle die noch nie Sex mit <player> hatten trinken <n>.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 },
-                "variables": [
-                    {
-                        "name": "n",
-                        "type": "randomInteger",
-                        "range": { "bottom": 1, "top": 5 }
-                    },
-                    {
-                        "name": "player",
-                        "type": "selectors",
-                        "selectors": [
-                            {
-                                "type": "randomPlayer"
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "text": "Kreditkartenbesitzer trinken.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Alle Polen trinken.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            },
-            {
-                "text": "Deutsche trinken.",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 }
-            }
-        ]
-    },
-    {
-        "name": "Stop",
-        "frequency": 0.5,
-        "icon": "FaBomb",
-        "order": "random",
-        "cards": [
-            {
-                "text": "Gehe zurück zum Start.",
-                "frequency": 0.5,
-                "appearance": { "lower": 0, "upper": 1 },
-                "actions": [
-                    {
-                        "type": "moveBack",
-                        "offset": 99999,
-                        "selectors": [
-                            {
-                                "type": "self"
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "text": "Gehe <n> Felder zurück.",
-                "actions": [
-                    {
-                        "type": "moveBack",
-                        "offset": {
-                            "type": "variable",
-                            "name": "n"
+                            ]
                         },
-                        "selectors": [
-                            {
-                                "type": "self"
-                            }
-                        ]
-                    }
-                ],
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 },
-                "variables": [
-                    {
-                        "name": "n",
-                        "type": "randomInteger",
-                        "range": {
-                            "bottom": 1,
-                            "top": 12
+                        {
+                            "text": "<p> hat gewonnen.",
+                            "actions": [
+                                {
+                                    "type": "moveBack",
+                                    "offset": 3,
+                                    "selectors": {
+                                        "type": "variable",
+                                        "name": "self"
+                                    }
+                                }
+                            ]
                         }
-                    }
-                ]
-            }
-        ]
-    }
-]
+                    ]
+                },
+                {
+                    "text": "Zeige deinen besten Tanz-move.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Mache eine Person in der Runde nach, die anderen müssen erraten wer du bist. Wer es zuerst errät verteilt 2 Schlücke.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Filmzitate: jeder nennt ein Zitat falls sich zwei Leute sich auf den selben Film / Filmreihe beziehen trinken alle.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Mache einen Promi nach, die Person die dich als erstes erkennt, verteilt 4 Schlücke.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Lies den letzten Eintrag in deinen Notizen vor.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Lies die letzte Nachricht vor, die du bekommen hast.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Welche 2 Personen würdest du für einen 3er auswählen? Die Auserwählten trinken.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0.4, "upper": 1 }
+                },
+                {
+                    "text": "Nenne den Mittelnamen von 4 Personen. Für jede weiteren darfst du 2 Schlücke verteilen. (weniger als 4 => Trinken)",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "187 4 Life - Für jedes genannte Lied verteilst du 1 Schluck (max.10)",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Gehe zurück auf Start.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 },
+                    "actions": [
+                        {
+                            "type": "moveBack",
+                            "offset": 99999,
+                            "selectors": [
+                                {
+                                    "type": "self"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "text": "Trink so viel wie du gewürfelst hast und gehe auf Start.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 },
+                    "actions": [
+                        {
+                            "type": "moveBack",
+                            "offset": 99999,
+                            "selectors": [
+                                {
+                                    "type": "self"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "text": "Ich packe mein Koffer mit Alkoholsorten. Der Verlierer trinkt 10.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Lass dich von <player> beleidigen.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 },
+                    "variables": [
+                        {
+                            "name": "player",
+                            "type": "selectors",
+                            "selectors": [
+                                {
+                                    "type": "randomPlayer",
+                                    "self": false
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "text": "Schicke jemandem ein krasses Bild auf WhatsApp.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Beledige deinen linken Nachbar auf Russisch.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Du erzählst einen Witz, jeder, der lacht, trinkt. Wenn keiner lacht trinkst du 3.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Beleidige die Mutter von <player> oder trink <n>.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 },
+                    "variables": [
+                        {
+                            "name": "player",
+                            "type": "selectors",
+                            "selectors": [
+                                {
+                                    "type": "randomPlayer",
+                                    "self": false
+                                }
+                            ]
+                        },
+                        {
+                            "name": "n",
+                            "type": "randomInteger",
+                            "range": {"top": 5, "bottom": 1}
+                        }
+                    ]
+                },
+                {
+                    "text": "Sag wer die hässlichste Person in der Runde ist oder trink <n>.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 },
+                    "variables": [
+                        {
+                            "name": "n",
+                            "type": "randomInteger",
+                            "range": {"top": 5, "bottom": 1}
+                        }
+                    ]
+                },
+                {
+                    "text": "Mache <player> ein Kompliment.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 },
+                    "variables": [
+                        {
+                            "name": "player",
+                            "type": "selectors",
+                            "selectors": [
+                                {
+                                    "type": "randomPlayer",
+                                    "self": false
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "text": "Erzähle eine peinliche Sex Geschichte.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Ruf deine Mutter an und sag ihr, wie lieb du sie hast, oder trinke 3.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Wie alt war dein ältester Sex Partner?",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Wann hast du das letzte mal gekotzt?",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Sag wer die hübschseste Person in der Runde ist oder trink <n>.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 },
+                    "variables": [
+                        {
+                            "name": "n",
+                            "type": "randomInteger",
+                            "range": {"top": 5, "bottom": 1}
+                        }
+                    ]
+                },
+                {
+                    "text": "Erzähle <player> ein Geheimnis.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 },
+                    "variables": [
+                        {
+                            "name": "player",
+                            "type": "selectors",
+                            "selectors": [
+                                {
+                                    "type": "randomPlayer",
+                                    "self": false
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "text": "Jeder sagt reihum Pornoseiten, wer keine kennt trinkt 4.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Reihum sagt jeder ein polnisches Wort, jeder der keins kennt trinkt <n>.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 },
+                    "variables": [
+                        {
+                            "name": "n",
+                            "type": "randomInteger",
+                            "range": {
+                                "bottom": 1,
+                                "top": 5
+                            }
+                        }
+                    ]
+                },
+                {
+                    "text": "Du musst ein Lied von den Spice-Girls zum besten geben.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Jeder sagt amerikanische Präsidenten, wer keinen mehr weiß, muss trinken.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Erzähl ne Kifferstory von dir.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Was ist deine Lieblingsdroge?",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "10 Liegestütz oder <n> Schlücke?",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 },
+                    "variables": [
+                        {
+                            "name": "n",
+                            "type": "randomInteger",
+                            "range": {"top": 5, "bottom": 1}
+                        }
+                    ]
+                } 
+            ]
+        },
+        {
+            "name": "Curse",
+            "frequency": 0.7,
+            "icon": "FaBiohazard",
+            "order": "shuffledIndividual",
+            "cards": [
+                {
+                    "text": "Redeverbot für alle! Wer zuerst spricht, trinkt.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Du darfst die nächsten 2 Minuten nur mit unverständlichem Gerede antworten.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Für die nächsten 2 Runden braucht jeder deiner Sätze ein \"Bruder\" oder ein \"Wallah\".",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Suche dir einen Drink-Mate aus.",
+                    "frequency": 0.2,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Rede die nächsten 3 Runden nur in veralteter Jugendsprache.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Trink bei den nächsten <n> Aufgaben mit.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 },
+                    "variables": [
+                        {
+                            "type": "randomInteger",
+                            "name": "n",
+                            "range": { "bottom": 3, "top": 5 }
+                        }
+                    ]
+                },
+                {
+                    "text": "Denke dir eine Trinkregel aus. Bei Verstoß muss getrunken werden.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Suche dir ein Wort aus. Bis du das nächste mal dran bist, darfst du nur dieses Wort sagen.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Der nächste, der etwas Dummes sagt, trinkt 8.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Der nächste, der lacht, trinkt.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Die erste Person, die raucht trinkt 5.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Setz dich 1 Runde auf den Boden.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Der/die erste der sein Smartphone berührt trinkt 3.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "10 Minuten WC-Verbot für alle.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Du musst diese Spielrunde stehen.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Spiele eine Runde lang mit geschlossenen Augen.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Trinke ein Schluck und halte diesen 1 Runde im Mund.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Schalte für 5 Minuten das Licht aus.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Alle lächeln. Wer als Ertses aufhört, der trinkt.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Du darfst die nächsten 10 Minuten keine Fragen beantworten, sonst trinkst du.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                }
+            ]
+        },
+        {
+            "name": "Blackbox",
+            "frequency": 0.1,
+            "icon": "FaBoxOpen",
+            "order": "shuffledGlobal",
+            "cards": [
+                {
+                    "text": "Stimmt ab: In wem schlummern die größten kriminellen Energien? Derjenige trinkt.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Stimmt ab: Wenn der Abend ein Horrorfilm wäre, wer würde zuerst abkratzen? Derjenige trinkt.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Stimmt ab: Wer würde am ehesten einen ONS haben? Derjenige trinkt.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Stimmt ab: Wer wird als erstes Mutter/Vater? Derjenige trinkt.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Stimmt ab: Wer holt am ehesten die Gewichte für die Wasserwaage? Derjenige trinkt.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Stimmt ab: Wer schaut heute zu tief ins Glas? Derjenige Ext!",
+                    "frequency": 0.6,
+                    "appearance": { "lower": 0.7, "upper": 1 }
+                }
+            ]
+        },
+        {
+            "name": "Collective",
+            "frequency": 1,
+            "icon": "FaUsers",
+            "order": "shuffledGlobal",
+            "cards": [
+                {
+                    "text": "Alle, die Herr der Ringe gesehen/gelesen haben, trinken 3.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Jeder der schonmal Geld beim Gambling verloren hat, trinkt.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Alle die im Landkreis wohnen trinken. Ihr Bauernfünfer!",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Wer nicht weiß, wie man die Entwickleroptionen am Handy aktiviert, trinkt.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Alle mit kurzen Haaren trinken.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Alle mit langen Haaren trinken.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Alle, die Matthias heißen, trinken.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Alle, die eine Jeans tragen, trinken.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Alle, die keine Brillen oder Kontaklinsen tragen, trinken.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Alle jünger als <n> trinken.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 },
+                    "variables": [
+                        {
+                            "name": "n",
+                            "type": "randomInteger",
+                            "range": { "bottom": 18, "top": 23 }
+                        }
+                    ]
+                },
+                {
+                    "text": "Alle mit einem Tattoo trinken.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Alle mit einer <n> im Geburtsdatum trinken.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 },
+                    "variables": [
+                        {
+                            "type": "randomInteger",
+                            "name": "n",
+                            "range": {
+                                "bottom": 0,
+                                "top": 9
+                            }
+                        }
+                    ]
+                },
+                {
+                    "text": "Alle, die eine Jogginghose tragen, trinken.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Alle trinken.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Alle mit Geschwistern trinken.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Alle ohne Geschwister trinken.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Alle m trinken.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Alle w trinken.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Alle, die Corona hatten, trinken.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Alle über 1,<size>5m trinken.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 },
+                    "variables": [
+                        {
+                            "name": "size",
+                            "type": "randomInteger",
+                            "range": {
+                                "bottom": 6,
+                                "top": 9
+                            }
+                        }
+                    ]
+                },
+                {
+                    "text": "Abstimmung: Sommer oder Winter? Die Minderheit trinkt.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Stimmt ab: Bierpong oder Flunkyball? Die Minderheit trinkt.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Alle die Spongebob nicht mögen trinken.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Alle mit mehr als <n> im Handy gespeicherten Weckern trinken.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 },
+                    "variables": [
+                        {
+                            "name": "n",
+                            "type": "randomInteger",
+                            "range": { "bottom": 3, "top": 10 }
+                        }
+                    ]
+                },
+                {
+                    "text": "Jeder der Körbchengrösse 75b oder größer hat trinkt.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Alle ohne Feuerzeug trinken.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Wer etwas verschüttet hat trinkt <n>.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 },
+                    "variables": [
+                        {
+                            "name": "n",
+                            "type": "randomInteger",
+                            "range": { "bottom": 1, "top": 5 }
+                        }
+                    ]
+                },
+                {
+                    "text": "Es trinken die Personen die am nächsten dem Start/Ziel sind.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Alle die 2D- und Flash-Games feiern trinken <n>.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 },
+                    "variables": [
+                        {
+                            "name": "n",
+                            "type": "randomInteger",
+                            "range": { "bottom": 1, "top": 5 }
+                        }
+                    ]
+                },
+                {
+                    "text": "Alle Leauge of Legends (inkl. TFT und ARAM) Begeisterten trinken 5.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Es trinken die, die ein ungerades Alter haben.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Pärchen trinken <n>.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 },
+                    "variables": [
+                        {
+                            "name": "n",
+                            "type": "randomInteger",
+                            "range": { "bottom": 1, "top": 5 }
+                        }
+                    ]
+                },
+                {
+                    "text": "Wer heute in der Schule/Arbeit war trinkt.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Alle trinken einen auf das gute Spiel.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Wer Facebook hat trinkt.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Erfinde einen Trinkspruch, zu dem alle trinken.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Alle die noch nie Sex im Auto hatten trinken <n>.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 },
+                    "variables": [
+                        {
+                            "name": "n",
+                            "type": "randomInteger",
+                            "range": { "bottom": 1, "top": 5 }
+                        }
+                    ]
+                },
+                {
+                    "text": "Alle hübschen Frauen trinken. Wenn keine trinkt, trinken alle Frauen.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Alle die noch nie Sex mit Ü30-jährigen hatten trinken <n>.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 },
+                    "variables": [
+                        {
+                            "name": "n",
+                            "type": "randomInteger",
+                            "range": { "bottom": 1, "top": 5 }
+                        }
+                    ]
+                },
+                {
+                    "text": "Jeder der eine schwarze Unterhose trägt trinkt <n>.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 },
+                    "variables": [
+                        {
+                            "name": "n",
+                            "type": "randomInteger",
+                            "range": { "bottom": 1, "top": 5 }
+                        }
+                    ]
+                },
+                {
+                    "text": "Alle trinken <n> außer <player>, der trinkt die Anzahl der Mitspieler und zwar doppelt.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 },
+                    "variables": [
+                        {
+                            "name": "n",
+                            "type": "randomInteger",
+                            "range": { "bottom": 1, "top": 5 }
+                        },
+                        {
+                            "name": "player",
+                            "type": "selectors",
+                            "selectors": [
+                                {
+                                    "type": "randomPlayer"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "text": "Jeder der heute noch nicht gekackt hat trinkt 5.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Wer Techno mag, der trinkt.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Singles trinken <n>.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 },
+                    "variables": [
+                        {
+                            "name": "n",
+                            "type": "randomInteger",
+                            "range": { "bottom": 1, "top": 5 }
+                        }
+                    ]
+                },
+                {
+                    "text": "Alle Deutsche die in Amerika aufgewachsen sind trinken.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Jeder der noch nie in nem Stripclub war trinkt.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Alle Nichtraucher trinken.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Jeder der WhatsApp hat trinkt.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Wer seine Zunge nicht rollen kann trinkt.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Alle die sich mal was gebrochen haben trinken.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Alle die noch nie Sex in der Dusche hatten trinken <n>.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 },
+                    "variables": [
+                        {
+                            "name": "n",
+                            "type": "randomInteger",
+                            "range": { "bottom": 1, "top": 5 }
+                        }
+                    ]
+                },
+                {
+                    "text": "Alle die diesen Monat Geburtstag haben oder hatten trinken <n>.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 },
+                    "variables": [
+                        {
+                            "name": "n",
+                            "type": "randomInteger",
+                            "range": { "bottom": 1, "top": 5 }
+                        }
+                    ]
+                },
+                {
+                    "text": "Gelegenheitsraucher trinken <n>.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 },
+                    "variables": [
+                        {
+                            "name": "n",
+                            "type": "randomInteger",
+                            "range": { "bottom": 1, "top": 5 }
+                        }
+                    ]
+                },
+                {
+                    "text": "Jeder der kein Internet Explorer benutzt trinkt.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Alle die betrunken sind trinken.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Alle, die etwas Rotes an haben trinken.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Dieses Spiel ist ab 18 Minderjährige trinken zur Strafe <n>.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 },
+                    "variables": [
+                        {
+                            "name": "n",
+                            "type": "randomInteger",
+                            "range": { "bottom": 1, "top": 5 }
+                        }
+                    ]
+                },
+                {
+                    "text": "Jeder der Firefox benutzt trinkt <n>.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 },
+                    "variables": [
+                        {
+                            "name": "n",
+                            "type": "randomInteger",
+                            "range": { "bottom": 1, "top": 5 }
+                        }
+                    ]
+                },
+                {
+                    "text": "Jeder, der noch nie in Amerika war trinkt.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Alle die Kopfhörer mit LEDs haben trinken.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Alle mit geradem Alter trinken.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Jeder der diesen Monat von Alkohol gekotzt hat trinkt <n>.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 },
+                    "variables": [
+                        {
+                            "name": "n",
+                            "type": "randomInteger",
+                            "range": { "bottom": 1, "top": 5 }
+                        }
+                    ]
+                },
+                {
+                    "text": "Alle die noch nie Sex mit <player> hatten trinken <n>.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 },
+                    "variables": [
+                        {
+                            "name": "n",
+                            "type": "randomInteger",
+                            "range": { "bottom": 1, "top": 5 }
+                        },
+                        {
+                            "name": "player",
+                            "type": "selectors",
+                            "selectors": [
+                                {
+                                    "type": "randomPlayer"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "text": "Kreditkartenbesitzer trinken.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Alle Polen trinken.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                },
+                {
+                    "text": "Deutsche trinken.",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 }
+                }
+            ]
+        },
+        {
+            "name": "Stop",
+            "frequency": 0.5,
+            "icon": "FaBomb",
+            "order": "random",
+            "cards": [
+                {
+                    "text": "Gehe zurück zum Start.",
+                    "frequency": 0.5,
+                    "appearance": { "lower": 0, "upper": 1 },
+                    "actions": [
+                        {
+                            "type": "moveBack",
+                            "offset": 99999,
+                            "selectors": [
+                                {
+                                    "type": "self"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "text": "Gehe <n> Felder zurück.",
+                    "actions": [
+                        {
+                            "type": "moveBack",
+                            "offset": {
+                                "type": "variable",
+                                "name": "n"
+                            },
+                            "selectors": [
+                                {
+                                    "type": "self"
+                                }
+                            ]
+                        }
+                    ],
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 },
+                    "variables": [
+                        {
+                            "name": "n",
+                            "type": "randomInteger",
+                            "range": {
+                                "bottom": 1,
+                                "top": 12
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
+

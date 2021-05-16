@@ -1,67 +1,72 @@
-[
-    {
-        "name": "Test",
-        "frequency": 1,
-        "order": "shuffledIndividual",
-        "cards": [
-            {
-                "text": "<x>",
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 },
-                "variables": [
-                    {
-                        "name": "x",
-                        "type": "selectors",
-                        "selectors": [
-                            {
-                                "type":"randomOrderOfSelectors",
-                                "selectors": [
-                                    {
-                                        "type": "all"
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "text": "Trinke <n> Schlücke oder gehe <n> Felder zurück.",
-                "options": [
-                    {
-                        "text": "Trinke <n>."
-                    },
-                    {
-                        "text": "Gehe <n> zurück. asdasdasda asdas sdasdasd",
-                        "actions": [
-                            {
-                                "type": "moveBack",
-                                "offset": {
-                                    "type": "variable",
-                                    "name": "n"
-                                },
-                                "selectors": [
-                                    {
-                                        "type": "self"
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ],
-                "frequency": 1,
-                "appearance": { "lower": 0, "upper": 1 },
-                "variables": [
-                    {
-                        "name": "n",
-                        "type": "randomInteger",
-                        "range": {
-                            "bottom": 3,
-                            "top": 5
+{
+    "settings": {
+        "board": false
+    },
+    "data": [
+        {
+            "name": "Test",
+            "frequency": 1,
+            "order": "shuffledIndividual",
+            "cards": [
+                {
+                    "text": "<x>",
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 },
+                    "variables": [
+                        {
+                            "name": "x",
+                            "type": "selectors",
+                            "selectors": [
+                                {
+                                    "type":"randomOrderOfSelectors",
+                                    "selectors": [
+                                        {
+                                            "type": "all"
+                                        }
+                                    ]
+                                }
+                            ]
                         }
-                    }
-                ]
-            }
-        ] 
-    }
-]
+                    ]
+                },
+                {
+                    "text": "Trinke <n> Schlücke oder gehe <n> Felder zurück.",
+                    "options": [
+                        {
+                            "text": "Trinke <n>."
+                        },
+                        {
+                            "text": "Gehe <n> zurück. asdasdasda asdas sdasdasd",
+                            "actions": [
+                                {
+                                    "type": "moveBack",
+                                    "offset": {
+                                        "type": "variable",
+                                        "name": "n"
+                                    },
+                                    "selectors": [
+                                        {
+                                            "type": "self"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    "frequency": 1,
+                    "appearance": { "lower": 0, "upper": 1 },
+                    "variables": [
+                        {
+                            "name": "n",
+                            "type": "randomInteger",
+                            "range": {
+                                "bottom": 3,
+                                "top": 5
+                            }
+                        }
+                    ]
+                }
+            ] 
+        }
+    ]
+}

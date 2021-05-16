@@ -1,5 +1,6 @@
 import React from "react";
 import { runOption } from "../card_logic/CardInterpreter";
+import { GAME_STATUS } from "../states/GlobalState";
 
 const CardView = ({ card, globalState, setGlobalState }) => {
 
@@ -9,7 +10,9 @@ const CardView = ({ card, globalState, setGlobalState }) => {
                 {card.text}
             </div>
             <div className="control-view-options">
-                {card.options.map((o) => (
+                {globalState.gameStatus === GAME_STATUS.FINISHED ?
+                    []
+                    : card.options.map((o) => (
                     <OptionButton
                         key={o.text}
                         option={o}

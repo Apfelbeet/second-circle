@@ -1,6 +1,7 @@
 {
     "settings": {
-        "board" : true
+        "board" : true,
+        "finishTypeName": "Finish"
     },
     "data": [
         {
@@ -43,6 +44,16 @@
                     "appearance": { "lower": 0, "upper": 1 }
                 }
             ] 
+        },
+        {
+            "name": "Finish",
+            "frequency": 0,
+            "cards": [
+                {
+                    "text": "You have won! (✿◠‿◠)\n All the others have to chug their drinks.",
+                    "frequency": 1
+                }
+            ]
         }
     ]
 }

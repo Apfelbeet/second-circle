@@ -30,8 +30,8 @@ export function getFinishSquare(index) {
         index,
         FINISH_SQUARE,
         (globalState, sqaure, source) => {
-            alert(source.name + " has won!");
-            return globalState.withGameStatus(GAME_STATUS.FINISHED);
+            const card = CardInterpreter.resolveCard(globalState.deck.drawFinishCard(), globalState, source);
+            return globalState.withGameStatus(GAME_STATUS.FINISHED).withActiveCard(card);
         }
     );
 }

@@ -1,4 +1,4 @@
-import {shuffleList} from '../util/util'
+import { shuffleList } from "../util/util";
 
 /**
  * List of all decks there are installed.
@@ -61,6 +61,31 @@ export function loadDecklist() {
 }
 
 /**
+ * Draws a random card from a list of cards regarding the frequency of the cards.
+ * @param {[*]} cards: list of cards
+ * @returns {*} card
+ */
+function drawCardFromList(cards) {
+    //selected is a subset of cardSet.
+    //generate random value (0-1), all cards with a bigger frequency property are contained in this subset.
+    //if the subset is empty this process will be repeated until the subset is not empty.
+    let selected = [];
+    let panic = 0;
+    do {
+        const ran = Math.random();
+        selected = cards.filter((card) => ran < card.frequency);
+        if (++panic === 100) {
+            selected = cards;
+            break;
+        }
+    } while (selected.length === 0);
+
+    //select random value from subset
+    const r = Math.random(new Date().getMilliseconds()) * selected.length;
+    return selected[Math.floor(r)];
+}
+
+/**
  * Uses the path of the deck to request all cards of the deck
  * and sets the current deck of the gamestate to the loaded one.
  *
@@ -107,21 +132,21 @@ export function loadDeckFromName(name, globalState, setGlobalState) {
 
 /**
  * drawShuffled is a way to get the cards of an type in random order.
- * Each key has it own entry, which stores a list of indices mapping to 
+ * Each key has it own entry, which stores a list of indices mapping to
  * the corresponding card in the list of all cards the passed type
  * and a current index, show to a point in this list.
  * This pointer shows the next card, that will be drawn.
- * 
+ *
  * With each call of a key the index/pointer that entry will be used to
  * draw the next card and will be increased by 1 (or set to zero if the end of the list is reached).
- * 
+ *
  * If a key is called and the pointer is zero the mapping list will be shuffled.
- * 
+ *
  * Currently the frequency and appearance property of a card are ignored.
- * 
- * @param {Deck} deck 
- * @param {*} type 
- * @param {PlayerState} source 
+ *
+ * @param {Deck} deck
+ * @param {*} type
+ * @param {PlayerState} source
  * @param {GlobalState} globalState
  * @param {*} key: will be used to find or store the right entry.
  * @returns next card
@@ -133,12 +158,10 @@ const drawShuffled = (deck, type, source, globalState, key) => {
     }
 
     if (!deck.drawShuffledMap.has(key)) {
-        deck.drawShuffledMap.set(
-            key,
-            {
-                index: 0,
-                mapping: [...Array(deck.getCardsByType(type).length).keys()]
-            })
+        deck.drawShuffledMap.set(key, {
+            index: 0,
+            mapping: [...Array(deck.getCardsByType(type).length).keys()],
+        });
     }
 
     const entry = deck.drawShuffledMap.get(key);
@@ -154,18 +177,18 @@ const drawShuffled = (deck, type, source, globalState, key) => {
     const card = allCards[entry.mapping[entry.index]];
     entry.index = (entry.index + 1) % allCards.length;
     return card;
-}
+};
 
 /**
- * Draws a random card of the passed type. It favors cards that are 
+ * Draws a random card of the passed type. It favors cards that are
  * allowed at the position of the source, but if it dosn't find such a card,
  * any other card of this type may be returned. Same applies if there is no
  * card of the passed type.
- * 
- * @param {*} deck 
- * @param {*} type 
- * @param {*} source 
- * @param {*} globalState 
+ *
+ * @param {*} deck
+ * @param {*} type
+ * @param {*} source
+ * @param {*} globalState
  * @returns random card of passed type
  */
 const drawRandom = (deck, type, source, globalState) => {
@@ -183,7 +206,11 @@ const drawRandom = (deck, type, source, globalState) => {
     if (cards === undefined || cards.length === 0) {
         cardSet = deck.getAllCards();
     } else {
-        const cardsInAppearanceRange = deck.getCardsByTypeAndPosition(type, source.position, boardLength)
+        const cardsInAppearanceRange = deck.getCardsByTypeAndPosition(
+            type,
+            source.position,
+            boardLength
+        );
 
         if (cardsInAppearanceRange.length === 0) {
             cardSet = cards;
@@ -196,28 +223,23 @@ const drawRandom = (deck, type, source, globalState) => {
     if (cardSet.length === 1) {
         return cardSet[0];
     } else {
-        //selected is a subset of cardSet.
-        //generate random value (0-1), all cards with a bigger frequency property are contained in this subset.
-        //if the subset is empty this process will be repeated until the subset is not empty.
-        let selected = [];
-        do {
-            const ran = Math.random();
-            selected = cardSet.filter((card) => ran < card.frequency);
-        } while (selected.length === 0);
-
-        //select random value from subset
-        const r =
-            Math.random(new Date().getMilliseconds()) * selected.length;
-        return selected[Math.floor(r)];
+        return drawCardFromList(cardSet);
     }
-} 
+};
+
+const defaultFinishCards = [
+    {
+        text: "Congrats! You have won!",
+        frequency: 1,
+    },
+];
 
 /**
  * A deck represents a set of cards in diffrent categories.
  *
  * The structure of a deck is:
  * {
- *  settings: { 
+ *  settings: {
  *      //Whether the board is visible or not.
  *      "board": {boolean}
  *  },
@@ -234,14 +256,14 @@ const drawRandom = (deck, type, source, globalState) => {
  *
  *      //List of all cards
  *      "cards" [...]
- * 
+ *
  *      //The order with which the cards are drawn.
  *      "order": "shuffledGlobal|shuffledIndividual|random"
  *  },
  *  ...
  * ]
  * }
- * 
+ *
  */
 class Deck {
     constructor(deck) {
@@ -251,12 +273,27 @@ class Deck {
         }
 
         this.data = deck.data;
+
         this.settings = deck.settings;
         if (this.settings === undefined || typeof this.settings !== "object") {
             this.settings = {};
         }
-        if (this.settings.board === undefined || typeof this.settings.board !== "boolean") {
+        if (
+            this.settings.board === undefined ||
+            typeof this.settings.board !== "boolean"
+        ) {
             this.settings.board = true;
+        }
+
+        //assign card of finish type to this.finishCards
+        if (this.settings.finishTypeName === undefined) {
+            this.finishCards = defaultFinishCards;
+        } else {
+            const ft = this.getTypeByName(this.settings.finishTypeName)
+            if (ft === undefined)
+                this.finishCards = defaultFinishCards;
+            else
+                this.finishCards = this.getCardsByType(ft);
         }
     }
 
@@ -271,7 +308,7 @@ class Deck {
                     frequency:
                         type.frequency === undefined ? 0 : type.frequency,
                     icon: type.icon,
-                    order: type.order
+                    order: type.order,
                 };
             })
             .filter((type) => type !== undefined && type.name !== undefined);
@@ -287,13 +324,23 @@ class Deck {
 
         do {
             const ran = Math.random();
-            selectedTypes = this.getTypes()
-                .filter((value) => ran < value.frequency);
+            selectedTypes = this.getTypes().filter(
+                (value) => ran < value.frequency
+            );
         } while (selectedTypes.length === 0);
 
         const x =
             selectedTypes[Math.floor(Math.random() * selectedTypes.length)];
         return x;
+    }
+
+    /**
+     * Returns type with the passed name.
+     * @param {String} name of the type
+     * @returns Type/category object
+     */
+    getTypeByName(name) {
+        return this.getTypes().find((t) => t.name === name);
     }
 
     /**
@@ -309,17 +356,18 @@ class Deck {
     }
 
     /**
-     * 
-     * @param {*} type 
-     * @param {number} position 
-     * @param {number} boardLength 
+     *
+     * @param {*} type
+     * @param {number} position
+     * @param {number} boardLength
      * @returns all cards of that type that can be on this position.
      */
     getCardsByTypeAndPosition(type, position, boardLength) {
         return this.getCardsByType(type).filter(
             (c) =>
-                c.appearance.lower * boardLength <= position &&
-                c.appearance.upper * boardLength >= position
+                c.appearance === undefined ||
+                (c.appearance.lower * boardLength <= position &&
+                    c.appearance.upper * boardLength >= position)
         );
     }
 
@@ -331,23 +379,32 @@ class Deck {
         return this.data.reduce((a, b) => a.concat(b), []);
     }
 
-
     /**
      * Draws card depending of the players position and square type.
-     * 
-     * @param {*} type 
-     * @param {*} source 
-     * @param {*} globalState 
+     *
+     * @param {*} type
+     * @param {*} source
+     * @param {*} globalState
      * @returns card
      */
     drawCard(type, source, globalState) {
         switch (type.order) {
             case "shuffledGlobal":
-                return drawShuffled(this, type, source, globalState, type.name)
+                return drawShuffled(this, type, source, globalState, type.name);
             case "shuffledIndividual":
-                return drawShuffled(this, type, source, globalState, type.name + "|" + source.id)
+                return drawShuffled(
+                    this,
+                    type,
+                    source,
+                    globalState,
+                    type.name + "|" + source.id
+                );
             default:
-                return drawRandom(this, type, source, globalState)
+                return drawRandom(this, type, source, globalState);
         }
+    }
+
+    drawFinishCard() {
+        return drawCardFromList(this.finishCards);
     }
 }

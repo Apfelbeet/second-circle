@@ -52,7 +52,7 @@ const Content = ({ globalState, setGlobalState }) => {
                 </div>
             </>
         );
-    } else if (globalState.gameStatus === GAME_STATUS.IN_TURN) {
+    } else if (globalState.gameStatus === GAME_STATUS.IN_TURN || globalState.gameStatus === GAME_STATUS.FINISHED) {
         const inturn_cp = globalState.getCurrentPlayer();
 
         return (

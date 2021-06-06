@@ -10,7 +10,7 @@
             "cards": [
                 {
                     "text": "<x>",
-                    "frequency": 1,
+                    "frequency": 27,
                     "appearance": { "lower": 0, "upper": 1 },
                     "variables": [
                         {
@@ -30,31 +30,14 @@
                     ]
                 },
                 {
-                    "text": "Trinke <n> Schlücke oder gehe <n> Felder zurück.",
                     "options": [
                         {
                             "text": "Trinke <n>."
                         },
                         {
-                            "text": "Gehe <n> zurück. asdasdasda asdas sdasdasd",
-                            "actions": [
-                                {
-                                    "type": "moveBack",
-                                    "offset": {
-                                        "type": "variable",
-                                        "name": "n"
-                                    },
-                                    "selectors": [
-                                        {
-                                            "type": "self"
-                                        }
-                                    ]
-                                }
-                            ]
+                            "text": "Gehe <n> zurück. asdasdasda asdas sdasdasd"
                         }
                     ],
-                    "frequency": 1,
-                    "appearance": { "lower": 0, "upper": 1 },
                     "variables": [
                         {
                             "name": "n",

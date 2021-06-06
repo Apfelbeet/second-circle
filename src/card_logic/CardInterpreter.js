@@ -108,7 +108,7 @@
  *
  * "self": The source of that card. (no extra syntax)
  *
- * "firstElementFromSelctors": Extracts the first player from selectors.
+ * "firstElementFromSelectors": Extracts the first player from selectors.
  * {
  *      ...
  *      //The selecors you want the first element of.
@@ -210,13 +210,7 @@
 
 import { actionFromRaw } from "./Action";
 import { shuffleList } from "../util/util";
-
-/**
- * Action that skips to the next player.
- */
-const ACTION_NEXT = {
-    type: "nextPlayer",
-};
+import { getVariable } from "./CardUtil";
 
 /**
  * translates the raw object of a card to a clean version, that meet some assumptions.
@@ -244,114 +238,20 @@ const ACTION_NEXT = {
  * @returns {*} resolved card. undefinded if an error occures
  */
 export function resolveCard(cardRaw, globalState, source) {
-    //check text
-    if (cardRaw.text === undefined || typeof cardRaw.text !== "string") {
-        console.error("couldn't resolve: " + cardRaw);
-        return undefined;
-    }
-
-    console.log("Start resolving: " + cardRaw.text);
-
-    //check frequency:
-    //- is defined
-    //- 0 <= x <= 1
-    let fre;
-    if (
-        cardRaw.frequency === undefined ||
-        typeof cardRaw.frequency !== "number"
-    ) {
-        console.warn("invalid frequency in " + cardRaw);
-        fre = 0;
-    } else fre = Math.min(Math.max(cardRaw.frequency, 0), 1);
-
-    //check appearance
-    //- is defined with right types
-    //- 0 <= upper/lower <= 1
-    let app;
-    if (
-        cardRaw.appearance === undefined ||
-        cardRaw.appearance.lower === undefined ||
-        cardRaw.appearance.upper === undefined ||
-        typeof cardRaw.appearance.lower !== "number" ||
-        typeof cardRaw.appearance.upper !== "number"
-    ) {
-        console.warn("invalid appearance in" + cardRaw);
-        app = { lower: 0, upper: 1 };
-    } else {
-        app = {
-            lower: Math.min(Math.max(cardRaw.appearance, 0), 1),
-            upper: Math.min(Math.max(cardRaw.appearance, 0), 1),
-        };
-    }
-
-    //check options
-    //- is defined with right types
-    //- add "next" if empty
-    //- else add "skip"
-    let opt;
-
-    if (cardRaw.options === undefined || cardRaw.options === 0) {
-        opt = [newOption("next", [])];
-    } else {
-        opt = [...cardRaw.options, newOption("skip", [])];
-    }
 
     //resolve variables
+    const variables = resolveVariables(globalState, cardRaw.variables, source);
 
-    let variables;
-
-    if (cardRaw.variables === undefined) {
-        variables = [];
-    } else {
-        variables = resolveVariables(globalState, cardRaw.variables, source);
-    }
-
-    let actions;
-
-    if (cardRaw.actions === undefined) {
-        actions = [];
-    } else {
-        actions = [...cardRaw.actions];
-    }
+    const actions = [...cardRaw.actions];
 
     return {
         text: resolveText(cardRaw.text, variables),
-        options: resolveOptions(globalState, opt, actions, source, variables),
+        options: resolveOptions(globalState, cardRaw.options, actions, source, variables),
         actions: resolveActions(globalState, actions, source, variables),
-        frequency: fre,
-        appearance: app,
+        frequency: cardRaw.frequency,
+        appearance: cardRaw.appearance,
         source: source,
     };
-}
-
-/**
- * Create new option that can be used in a card.
- * The option isn't resolved.
- *
- * @param {*} text text of the option
- * @param {*} actions actions the options will have (default empty)
- * @returns option object
- */
-function newOption(text, actions = []) {
-    return {
-        text: text,
-        actions: actions,
-    };
-}
-
-/**
- * Returns correspoding variable to name.
- *
- * @param {string} name: Name of the variable
- * @param {[*]} variables: List of all defined variables.
- * @returns {{value: {*}, name: {string}, string: {string}}}
- */
-function getVariable(name, variables) {
-    const variable = variables.find((v) => v.name === name);
-    if (variable === undefined) {
-        console.error("can't find a variable \"" + name);
-    }
-    return variable;
 }
 
 /**
@@ -388,13 +288,11 @@ function resolveText(text, variables) {
  * @returns list of resolved options.
  */
 function resolveOptions(globalState, options, cardActions, source, variables) {
-    return options === undefined
-        ? []
-        : options
-              .map((o) =>
-                  resolveOption(globalState, o, cardActions, source, variables)
-              )
-              .filter((o) => o !== undefined);
+    return options
+        .map((o) =>
+            resolveOption(globalState, o, cardActions, source, variables)
+        )
+        .filter((o) => o !== undefined);
 }
 
 /**
@@ -417,20 +315,9 @@ function resolveOptions(globalState, options, cardActions, source, variables) {
  * @returns {{text: string, actions: [resolvedAction]}}
  */
 function resolveOption(globalState, option, cardActions, source, variables) {
-    if (option.text === undefined) return undefined;
-
-    let act = option.actions;
-    if (act === undefined) {
-        act = [];
-    }
-
-    if (act.length === 0 && cardActions.length === 0) {
-        act = [ACTION_NEXT];
-    }
-
     return {
         text: resolveText(option.text, variables),
-        actions: resolveActions(globalState, act, source, variables),
+        actions: resolveActions(globalState, option.actions, source, variables),
     };
 }
 
@@ -458,15 +345,13 @@ export function runOption(globalState, setGlobalState, cardActions, option) {
  * @returns resolved actions
  */
 function resolveActions(globalState, actions, source, variables) {
-    return actions === undefined
-        ? []
-        : actions
-              .map((a) => actionFromRaw(a, source, variables))
-              .filter((a) => a !== undefined)
-              .map((a) => {
-                  a.resolve(globalState);
-                  return a;
-              });
+    return actions
+        .map((a) => actionFromRaw(a, source, variables))
+        .filter((a) => a !== undefined)
+        .map((a) => {
+            a.resolve(globalState);
+            return a;
+        });
 }
 
 /**
@@ -493,11 +378,8 @@ export function runActions(globalState, setGlobalState, actions) {
  * @returns list of player ids (distinct)
  */
 export function resolveSelectors(globalState, selectors, source, variables) {
-    if (selectors === undefined) {
-        return [];
-    } else if (selectors.type === "variable") {
-        const variable = getVariable(selectors.name, variables);
-        return variable === undefined ? [] : variable.value;
+    if (selectors.type === "variable") {
+        return getVariable(selectors.name, variables).value;
     }
 
     const list = [];
@@ -527,24 +409,15 @@ export function resolveSelectors(globalState, selectors, source, variables) {
  * @returns list of player ids
  */
 export function resolveSelector(globalState, selector, source, varibales = []) {
-    const invalidArguments = () => {
-        console.error("invalid arguments in selector.");
-    };
-
-    if (selector === undefined || selector.type === undefined) {
-        console.error("invalid selector: " + selector);
-        return undefined;
-    }
-
     const excluded =
         selector.excluded === undefined
             ? []
             : resolveSelectors(
-                  globalState,
-                  selector.excluded,
-                  source,
-                  varibales
-              );
+                globalState,
+                selector.excluded,
+                source,
+                varibales
+            );
 
     let unfiltered = [];
 
@@ -573,15 +446,12 @@ export function resolveSelector(globalState, selector, source, varibales = []) {
          *  "selectors": [selector]
          */
         case "firstElementFromSelectors":
-            const s =
-                selector.selectors === undefined
-                    ? []
-                    : resolveSelectors(
-                          globalState,
-                          selector.selectors,
-                          source,
-                          varibales
-                      );
+            const s = resolveSelectors(
+                globalState,
+                selector.selectors,
+                source,
+                varibales
+            );
             if (s.length > 1) {
                 unfiltered = [s[0]];
             } else {
@@ -595,15 +465,12 @@ export function resolveSelector(globalState, selector, source, varibales = []) {
          *  "selectors": [selector]
          */
         case "randomOrderOfSelectors":
-            const resSelectors =
-                selector.selectors === undefined
-                    ? []
-                    : resolveSelectors(
-                          globalState,
-                          selector.selectors,
-                          source,
-                          varibales
-                      );
+            const resSelectors = resolveSelectors(
+                globalState,
+                selector.selectors,
+                source,
+                varibales
+            );
 
             shuffleList(resSelectors);
 
@@ -617,9 +484,6 @@ export function resolveSelector(globalState, selector, source, varibales = []) {
          */
         case "randomPlayer":
             let self = selector.self;
-            if (self === undefined || typeof self != "boolean") {
-                self = true;
-            }
 
             const internSelector = [
                 {
@@ -634,10 +498,10 @@ export function resolveSelector(globalState, selector, source, varibales = []) {
                             ],
                             excluded: !self
                                 ? [
-                                      {
-                                          type: "self",
-                                      },
-                                  ]
+                                    {
+                                        type: "self",
+                                    },
+                                ]
                                 : [],
                         },
                     ],
@@ -658,39 +522,33 @@ export function resolveSelector(globalState, selector, source, varibales = []) {
          * "selectors": [selector],
          */
         case "indexOffset":
-            if (
-                typeof selector.offset !== "number" ||
-                typeof selector.selectors !== "object"
-            ) {
-                invalidArguments();
-                unfiltered = [];
-            } else {
-                const offset = resolveVariableInput(
-                    selector.offset,
-                    varibales,
-                    0
-                );
-                const sels = resolveSelectors(
-                    globalState,
-                    selector.selectors,
-                    source,
-                    varibales
-                );
 
-                unfiltered = sels
-                    .map((s) => {
-                        const playerIndex = globalState.getIndexFromId(s);
-                        if (playerIndex === undefined) {
-                            return undefined;
-                        } else {
-                            return globalState.players[
-                                (playerIndex + offset) %
-                                    globalState.players.length
-                            ].id;
-                        }
-                    })
-                    .filter((s) => s !== undefined);
-            }
+            const offset = resolveVariableInput(
+                selector.offset,
+                varibales,
+                0
+            );
+            const sels = resolveSelectors(
+                globalState,
+                selector.selectors,
+                source,
+                varibales
+            );
+
+            unfiltered = sels
+                .map((s) => {
+                    const playerIndex = globalState.getIndexFromId(s);
+                    if (playerIndex === undefined) {
+                        return undefined;
+                    } else {
+                        return globalState.players[
+                            (playerIndex + offset) %
+                            globalState.players.length
+                        ].id;
+                    }
+                })
+                .filter((s) => s !== undefined);
+
             break;
 
         /**
@@ -820,14 +678,14 @@ function resolveVariable(globalState, variable, source) {
                         val === undefined
                             ? "undefined"
                             : val
-                                  .reduce(
-                                      (a, b) =>
-                                          a +
-                                          ", " +
-                                          globalState.getPlayerById(b).name,
-                                      ""
-                                  )
-                                  .substring(2);
+                                .reduce(
+                                    (a, b) =>
+                                        a +
+                                        ", " +
+                                        globalState.getPlayerById(b).name,
+                                    ""
+                                )
+                                .substring(2);
                 } else {
                     asString = "(empty)";
                 }
@@ -839,7 +697,7 @@ function resolveVariable(globalState, variable, source) {
                 };
             }
             break;
-        
+
         /**
          * {
          *  "name": string,
@@ -855,7 +713,7 @@ function resolveVariable(globalState, variable, source) {
             } else {
                 console.log(variable)
                 const ran = Math.floor(Math.random() * variable.strings.length)
-                
+
                 console.log(ran)
                 console.log(variable.strings[ran])
                 return {
@@ -864,7 +722,7 @@ function resolveVariable(globalState, variable, source) {
                     string: variable.strings[ran]
                 }
             }
-            
+
             break;
         default:
             console.error("unkown variable type");

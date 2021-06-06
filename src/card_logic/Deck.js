@@ -1,4 +1,5 @@
 import { shuffleList } from "../util/util";
+import {unifyCards} from "./CardUnifier";
 
 /**
  * List of all decks there are installed.
@@ -273,6 +274,8 @@ class Deck {
         }
 
         this.data = deck.data;
+        this.data.forEach(type => {type.cards = unifyCards(type.cards)});
+        console.log(this.data);
 
         this.settings = deck.settings;
         if (this.settings === undefined || typeof this.settings !== "object") {

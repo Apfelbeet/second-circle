@@ -27,7 +27,7 @@ function unifyCard(card) {
         if (Array.isArray(card.variables)) {
             c.variables = unifyVariables(card.variables);
         } else {
-            c.variable = [];
+            c.variables = [];
         }
 
         c.options = unifyOptions(card.options, c.variables);
@@ -72,7 +72,6 @@ function unifyOption(option, variables) {
     if (typeof option === "object") {
         const o = {};
         o.text = typeof option.text === "string" ? option.text : "";
-        console.log(option)
         if (Array.isArray(option.actions)) {
             o.actions = unifyActions(option.actions, variables);
         } else {
@@ -203,8 +202,8 @@ function unifyVariableInput(input, variables, defaultValue, onNotAVariable = (v)
     if (typeof input === "object" && input.type === "variable") {
         const variable = getVariable(input.name, variables);
 
-        if (typeof variable === "object") {
-            return variable;
+        if (variable !== undefined) {
+            return input;
         } else {
             warn(input, "Use of an invalid variable.");
             return defaultValue;

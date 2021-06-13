@@ -275,7 +275,6 @@ class Deck {
 
         this.data = deck.data;
         this.data.forEach(type => {type.cards = unifyCards(type.cards)});
-        console.log(this.data);
 
         this.settings = deck.settings;
         if (this.settings === undefined || typeof this.settings !== "object") {

@@ -238,7 +238,6 @@ import { getVariable } from "./CardUtil";
  * @returns {*} resolved card. undefinded if an error occures
  */
 export function resolveCard(cardRaw, globalState, source) {
-
     //resolve variables
     const variables = resolveVariables(globalState, cardRaw.variables, source);
 

@@ -2,6 +2,7 @@
  * CardInterpreter provides bunch of function to decode/resolve cards to enable embedding them into the game.
  * A card is usually stored in a deck. To understand the structure of the deck, you want to look into the Deck file.
  * The CardInterpreter is only responsible for the individual card.
+ * It assumes that the cards have the right syntax and don't miss any attributes. The deck should be unified by using the functions of CardUnifier.js. 
  *
  * A unresolved card (raw input) is a json-object with the following strutcture:
  * {
@@ -20,8 +21,6 @@
  *
  *      //options are a more complex structure, the next passage explains their structure and purpose.
  *      //options is a list of options the player will see next to the card.
- *      //Non empty list will be extended with an extra "skip" option.
- *      //Empty or undefined lists will be replaced with a list with only a "next" option.
  *      "options": [option]
  *
  *      //actions are a more complex structure, an extra passage explains their structure and purpose.
@@ -30,7 +29,7 @@
  *
  *      //variables are a more complex structure, an extra passage explains their structure and purpose.
  *      //variables are a way to generate data and use them at other points in the card.
- *      //Example: You want to display a number based on the Gamestate. In the text you can then reference the variable
+ *      //Example: You want to display a number based on the Gamestate. In the text you can then reference the variable.
  *      "variables": [variables]
  * }
  *
@@ -59,14 +58,14 @@
  *
  * An action is an event that will change the state of the game.
  * Any card can have actions (general and/or special ones for each option) that will be executed after the user choose an option.
- * There are multiple types of actions, but every unresolved/raw action ist based on this structure:
+ * There are multiple types of actions with different structures, but every unresolved/raw action is based on this structure:
  * {
  *      //Name of the type (see list below)
  *      "type": {string}
  * }
  *
- * A action cann pass two phases:
- * 1. Resolve: Gathers als informations of the current gamestate it needs to run the action. (e.g. resolving selectors)
+ * A action can pass two phases:
+ * 1. Resolve: Gathers all informations of the current gamestate it needs to run the action. (e.g. resolving selectors)
  * 2. Run: Perfroms the action and changes the current gamestate.
  *
  * List of all types of actions and their sturcutre:
@@ -79,7 +78,7 @@
  *      "offset": {number}
  * }
  *
- * "moveBack": Like "move", but the offset is inverted. ("move" with offset:=-2 = "moveBack" with offset:=2)
+ * "moveBack": Like "move", but the offset is inverted. ("move" with offset:=-2 =: "moveBack" with offset:=2)
  *
  * "nextPlayer": This action will change the current player to the next player on turn.
  * {
@@ -213,14 +212,9 @@ import { shuffleList } from "../util/util";
 import { getVariable } from "./CardUtil";
 
 /**
- * translates the raw object of a card to a clean version, that meet some assumptions.
- * - frequency is always defined and between 0 and 1 (in case of an invalid input the value is 0)
- * - appearance.upper/.lower is alsways definded and betwenn 0 and 1
- *  (in case if an invalid input lower = 0 and upper = 1)
- * - there is atleast one option (to continue the game )and if there are more options, a skip-option will be added.
- *
- * All options and actions are resolved. That means they will collect all informations they need to be runned.
- * If an option/action couldn't be resolved, it will be filtered out.
+ * Turns an passive object of a card into an active instance, 
+ * by resolving the individual parts (options, actions, variables, text).
+ * They will collect all informations they need to be runned.
  *
  * cardRaw:
  * {
@@ -238,15 +232,13 @@ import { getVariable } from "./CardUtil";
  * @returns {*} resolved card. undefinded if an error occures
  */
 export function resolveCard(cardRaw, globalState, source) {
-    //resolve variables
+    
     const variables = resolveVariables(globalState, cardRaw.variables, source);
-
-    const actions = [...cardRaw.actions];
 
     return {
         text: resolveText(cardRaw.text, variables),
-        options: resolveOptions(globalState, cardRaw.options, actions, source, variables),
-        actions: resolveActions(globalState, actions, source, variables),
+        options: resolveOptions(globalState, cardRaw.options, source, variables),
+        actions:  resolveActions(globalState, cardRaw.actions, source, variables),
         frequency: cardRaw.frequency,
         appearance: cardRaw.appearance,
         source: source,
@@ -286,10 +278,10 @@ function resolveText(text, variables) {
  * @param {*} source player who started the resolve process of this card.
  * @returns list of resolved options.
  */
-function resolveOptions(globalState, options, cardActions, source, variables) {
+function resolveOptions(globalState, options, source, variables) {
     return options
         .map((o) =>
-            resolveOption(globalState, o, cardActions, source, variables)
+            resolveOption(globalState, o, source, variables)
         )
         .filter((o) => o !== undefined);
 }
@@ -313,7 +305,7 @@ function resolveOptions(globalState, options, cardActions, source, variables) {
  * @param {*} source player who started the resolve process of this card.
  * @returns {{text: string, actions: [resolvedAction]}}
  */
-function resolveOption(globalState, option, cardActions, source, variables) {
+function resolveOption(globalState, option, source, variables) {
     return {
         text: resolveText(option.text, variables),
         actions: resolveActions(globalState, option.actions, source, variables),
